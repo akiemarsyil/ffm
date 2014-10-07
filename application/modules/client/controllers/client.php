@@ -6,12 +6,16 @@ class Client extends MX_Controller {
 
 	public function __construct(){
 		parent::__construct();
+		$this->module='client';
+		$this->cname='client';
 
-		$this->cname=('client');
 	}
 
 	public function index(){
-		$this->load->view('template');
+		$data['cname'] = $this->cname;
+		$data['title'] = 'Film Fantasy Malang';
+		$data['content'] = $this->load->view('/main',$data,true);
+		$this->load->view('/template',$data);
 	}
 }
 /* End of file client.php */

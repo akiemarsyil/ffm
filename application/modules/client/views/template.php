@@ -6,11 +6,11 @@
 </head>
 
 <body>
-<?php //$this->load->view('/general/navigasi'); ?>
+<?php $this->load->view('/general/navigasi'); ?>
 
-<?php //echo $content; ?>
+<?php echo $content; ?>
 
-<?php //$this->load->view('/general/footer'); ?>
+<?php $this->load->view('/general/footer'); ?>
 </div>
 </body>
 </html>
