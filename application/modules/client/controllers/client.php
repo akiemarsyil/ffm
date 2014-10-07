@@ -17,6 +17,22 @@ class Client extends MX_Controller {
 		$data['content'] = $this->load->view('/main',$data,true);
 		$this->load->view('/template',$data);
 	}
+
+	public function login(){
+		$data['cname'] = $this->cname;
+		$data['content'] = $this->load->view('/login',$data,true);
+		$this->load->view('/template',$data);
+	}
+
+	public function doLogin(){
+
+	}
+
+	public function register(){
+		$data['cname'] = $this->cname;
+		$data['content'] = $this->load->view('/register',$data,true);
+		$this->load->view('/template',$data);
+	}
 }
 /* End of file client.php */
 
