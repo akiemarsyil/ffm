@@ -3,7 +3,8 @@
 		<div class="col-md-3"></div>
 		<div class="col-md-6">
 			<h2>Register</h2>
-			<form role="form" method="post" action="<?php base_url().'/doRegister;'?>" enctype="multipart/form-data">
+			<?php echo @$this->session->flashdata('flash_msg'); ?>
+			<form role="form" method="post" action="<?php base_url().'/client/doRegister;'?>" enctype="multipart/form-data">
   				<div class="form-group">
     				<label>Nama</label>
     				<input type="text" class="form-control" id="nama" name="nama">
@@ -34,8 +35,11 @@
   				</div>
   				<div class="form-group">
     				<label>Jenis Kelamin</label><br>
-    				<input type="radio" id="jk" name="jk" value="pria">Pria
-    				<input type="radio" id="jk" name="jk" value="perempuan">Perempuan
+    				<select id="jk" name="jk" class="form-control" placeholder="Pilih Jenis">
+						<!-- <option value="">Pilih Jenis</option> -->
+						<option value="pria">Pria</option>
+						<option value="perempuan">Perempuan</option>
+					</select>
   				</div>
   				<div class="form-group">
     				<label>Image</label>
