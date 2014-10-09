@@ -35,8 +35,20 @@ class Client extends MX_Controller {
 	}
 
 	public function do_register(){
-		$this->session->set_flashdata('flash_message', err_msg('tes'));
-		print_r('tes');exit;
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+		$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[12]|xss_clean');
+		$this->form_validation->set_rules('passwd', 'Password', 'trim|required|matches[cfPasswd]');
+		$this->form_validation->set_rules('cfPasswd', 'Password Confirmation', 'trim|required');
+
+		if($this->form_validation->run()== FALSE){
+			$this->session->set_flashdata('flash_message', err_msg(validation_errors()));
+			$this->session->set_flashdata('post_item', $this->input->post());
+			redirect($_SERVER['HTTP_REFERER']);
+		}else{
+			$this->session->set_flashdata('flash_message', succ_msg('sukses masuk'));
+			redirect('/client/register');
+		}
 	}
 }
 /* End of file client.php */
