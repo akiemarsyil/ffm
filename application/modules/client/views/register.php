@@ -3,8 +3,8 @@
 		<div class="col-md-3"></div>
 		<div class="col-md-6">
 			<h2>Register</h2>
-			<?php echo @$this->session->flashdata('flash_msg'); ?>
-			<form role="form" method="post" action="<?php base_url().'/client/doRegister;'?>" enctype="multipart/form-data">
+			<?php echo $this->session->flashdata('flash_message'); ?>
+			<form method="post" action="<?php echo base_url().'client/do_register';?>" enctype="multipart/form-data">
   				<div class="form-group">
     				<label>Nama</label>
     				<input type="text" class="form-control" id="nama" name="nama">

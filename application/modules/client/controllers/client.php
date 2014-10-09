@@ -24,7 +24,7 @@ class Client extends MX_Controller {
 		$this->load->view('/template',$data);
 	}
 
-	public function doLogin(){
+	public function do_login(){
 
 	}
 
@@ -34,19 +34,9 @@ class Client extends MX_Controller {
 		$this->load->view('/template',$data);
 	}
 
-	public function doRegister(){
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
-		$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[12]|xss_clean');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|matches[password2]');
-		$this->form_validation->set_rules('password2', 'Password Confirmation', 'trim|required');
-
-		if($this->form_validation->run()== FALSE){
-			$this->session->set_flashdata('flash_message', err_msg(validation_errors()));
-			$this->session->set_flashdata('post_item', $this->input->post());
-			redirect($_SERVER['HTTP_REFERER']);
-		}else{
-			$param = $this->input->post();
-		}
+	public function do_register(){
+		$this->session->set_flashdata('flash_message', err_msg('tes'));
+		print_r('tes');exit;
 	}
 }
 /* End of file client.php */
