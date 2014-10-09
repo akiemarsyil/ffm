@@ -8,7 +8,7 @@ class Client extends MX_Controller {
 		parent::__construct();
 		$this->module='client';
 		$this->cname='client';
-
+		$this->load->model('m_users','udb');
 	}
 
 	public function index(){
@@ -43,11 +43,32 @@ class Client extends MX_Controller {
 
 		if($this->form_validation->run()== FALSE){
 			$this->session->set_flashdata('flash_message', err_msg(validation_errors()));
-			$this->session->set_flashdata('post_item', $this->input->post());
 			redirect($_SERVER['HTTP_REFERER']);
 		}else{
-			$this->session->set_flashdata('flash_message', succ_msg('sukses masuk'));
-			redirect('/client/register');
+			$param = $this->input->post();
+			$img = $_FILES['img'];
+			$cek = $this->udb->cek_user($param['username'],$param['email']);
+			if($cek){
+				$this->session->set_flashdata('flash_message', err_msg('Registration failed, username or email has been registered'));
+			}else{
+				if($img['name']!=''){
+                    $img = save_picture($photo['tmp_name'], $img['name'], $base_url().'assets/uploads/', 0, 0, 0, $img['size'], 7, "photo");
+                    if($img['error']==1){
+                        $this->session->set_flashdata('flash_msg', err_msg('<strong>Error...!</strong><br /> '.@$img['msg']));
+                        redirect($_SERVER['HTTP_REFERER']);
+                    }
+                }
+                $param['img'] = @$img['nama_file'] ? $img['nama_file'] : 'no_image.jpg';
+                $param['reg_date'] = date('Y-m-d H:i:s');
+
+                $save = $this->udb->add_user($param);
+                	if ($save == TRUE){
+                    	$this->session->set_flashdata('flash_msg', succ_msg('Registration success, please check your email for activation'));
+                	}else{
+                    	$this->session->set_flashdata('flash_msg', err_msg('Terjadi kesalahan. Coba beberapa saat lagi'));
+                	}
+                	redirect($this->module.'/'.$this->client.'/register');
+			}	
 		}
 	}
 }

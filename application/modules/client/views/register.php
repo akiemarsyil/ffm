@@ -46,7 +46,7 @@
     				<input type="file" id="img" name="img">
     				<span class="help-block">Max file size = 1 Mb</span>
   				</div>
-  				<input type="hidden" id="isAktif" name="isAktif" class="form-control" value="1">
+  				<input type="hidden" id="isAktif" name="isAktif" class="form-control" value="no">
   				<input type="hidden" id="level" name="level" class="form-control" value="0">
   				<div class="form-group">
   					<button type="submit" class="btn btn-default pull-right">Submit</button>
