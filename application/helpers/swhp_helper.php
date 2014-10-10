@@ -194,4 +194,56 @@ function decoder($x)
     return $decrypted;
 }
 
+//menyimpan picture yang di upload
+// function save_picture($file, $file_name, $folder, $flag, $max_width, $max_height, $file_size, $max_size=NULL, $tail)
+// {
+//     $ret['error'] = 0;
+
+//     if ($file == "none") :
+//         $ret['error'] = 1;
+//         $ret['msg'] = "Please, Fill the picture ".$tail." field...";
+//         return $ret;
+//         exit();
+//     endif;
+
+//     $pict = getimagesize($file);
+//     $extension = strtolower(substr($file_name, -3, 3));
+//     if(!in_array($extension, array('jpg', 'png'))) :
+//         $ret['error'] = 1;
+//         $ret['msg'] = "Please, File ".$tail." must be JPG or PNG format...";
+//         return $ret;
+//         exit();
+//     endif;
+
+//     if ($flag) :
+//         if (($pict[0] > $max_width) or ($pict[1] > $max_height)) :
+//             $ret['error'] = 1;
+//             $ret['msg'] = "Please, Size picture ".$tail." must $max_height x $max_width pixel...";
+//             return $ret;
+//             exit();
+//         endif;
+//     endif;
+
+//     if($max_size!=NULL) :
+//         if($file_size/1024 >= $max_size*1024) :
+//             $ret['error'] = 1;
+//             $ret['msg'] = "File size too large. Maximum file size $max_size MB...";
+//             return $ret;
+//             exit();
+//         endif;
+//     endif; 
+    
+//     $name_file = $tail .time(). substr($file_name,-4, 4);
+//     if (!@copy($file, $folder."/".$name_file)) :
+//         $ret['error'] = 1;
+//         $ret['msg'] = "Copy file ".$tail." failed. Please check the file...";
+//         return $ret;
+//         exit();
+//     endif;
+
+//     $ret['nama_file'] = $name_file;
+//     return $ret;
+//     exit();
+// }
+
 ?>

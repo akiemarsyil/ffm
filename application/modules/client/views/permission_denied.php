@@ -7,7 +7,8 @@
     				<h3 class="panel-title">Fantasy Film Malang</h3>
   				</div>
   				<div class="panel-body">
-    				<?php echo $this->session->flashdata('flash_message'); ?>
+    				<?php //echo $this->session->flashdata('flash_message'); ?>
+    				Permission Denied
   				</div>
 			</div>
 		</div>

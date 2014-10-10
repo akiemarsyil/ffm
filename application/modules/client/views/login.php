@@ -16,7 +16,11 @@
   					<div class="pull-right">
   						<a href="<?php echo base_url().'client/register';?>">Register ?</a>
   					</div><br>
-  					<button type="submit" class="btn btn-default pull-right">Submit</button>
+                        <div class="row">
+                            <div class="col-xs-12 text-right">
+  					            <button type="submit" class="btn btn-sm btn-primary"><i class="icon-angle-right"></i> Submit</button>
+                            </div>
+                        </div>
   				</div>
   			</form>
 		</div>

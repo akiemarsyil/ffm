@@ -11,6 +11,7 @@ class Client extends MX_Controller {
 		$this->load->model('m_users','udb');
 	}
 
+	//menampilkan halaman awal
 	public function index(){
 		$data['cname'] = $this->cname;
 		$data['title'] = 'Film Fantasy Malang';
@@ -18,22 +19,31 @@ class Client extends MX_Controller {
 		$this->load->view('/template',$data);
 	}
 
+	//menampilkan halaman login
 	public function login(){
 		$data['cname'] = $this->cname;
 		$data['content'] = $this->load->view('/login',$data,true);
 		$this->load->view('/template',$data);
 	}
 
+	//fungsi menangani ketika login
 	public function do_login(){
 
 	}
 
+	//fungsi untuk logout
+	public function do_logout(){
+
+	}
+
+	//menampilkan halaman registrasi
 	public function register(){
 		$data['cname'] = $this->cname;
 		$data['content'] = $this->load->view('/register',$data,true);
 		$this->load->view('/template',$data);
 	}
 
+	//fungsi menangani registrasi dan pengiriman email aktivasi
 	public function do_register(){
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
@@ -47,30 +57,56 @@ class Client extends MX_Controller {
 		}else{
 			$param = $this->input->post();
 			$img = $_FILES['img'];
+			$path = base_url().'public/assets/uploads/';
 			$cek = $this->udb->cek_user($param['username'],$param['email']);
+			
 			if($cek){
 				$this->session->set_flashdata('flash_message', err_msg('Registration failed, username or email has been registered'));
 			}else{
-				if($img['name']!=''){
-                    $img = save_picture($photo['tmp_name'], $img['name'], $base_url().'assets/uploads/', 0, 0, 0, $img['size'], 7, "photo");
-                    if($img['error']==1){
-                        $this->session->set_flashdata('flash_msg', err_msg('<strong>Error...!</strong><br /> '.@$img['msg']));
-                        redirect($_SERVER['HTTP_REFERER']);
-                    }
-                }
-                $param['img'] = @$img['nama_file'] ? $img['nama_file'] : 'no_image.jpg';
+				//masih bermasalah
+				// if($img['name']!=''){
+    //                 $img = save_picture($img['tmp_name'], $img['name'], $path, 0, 0, 0, $img['size'], 7, "img");
+    //                 if($img['error']==1){
+    //                     $this->session->set_flashdata('flash_msg', err_msg('<strong>Error...!</strong><br /> '.$img['msg']));
+    //                     redirect($_SERVER['HTTP_REFERER']);
+    //                 }
+    //             }
+                $param['img'] = $img['nama_file'] ? $img['nama_file'] : 'no_image.jpg';
                 $param['reg_date'] = date('Y-m-d H:i:s');
-
+                
                 $save = $this->udb->add_user($param);
+                	
                 	if ($save == TRUE){
-                    	$this->session->set_flashdata('flash_msg', succ_msg('Registration success, please check your email for activation'));
+                		$to = $param['email'];
+						$subject =  'Film Fantasy Malang Account Activation ';
+						$message = 'Registered on '.date("Y-m-d H:i:s").
+						'<br>Email : '.$param['email'].
+						'<br>Username : '.$param['username'].
+						'<br>Password : '.$param['passwd'].
+						'<br><br><br>Click here for activation : '.base_url().'client/client/activation/'.paramEncrypt($param['username']);
+
+						send_email($to, $subject, $message);
+                    	$this->session->set_flashdata('flash_message', succ_msg('Registration success, please check your email for activation'));
                 	}else{
-                    	$this->session->set_flashdata('flash_msg', err_msg('Terjadi kesalahan. Coba beberapa saat lagi'));
+                    	$this->session->set_flashdata('flash_message', err_msg('Terjadi kesalahan. Coba beberapa saat lagi'));
                 	}
-                	redirect($this->module.'/'.$this->client.'/register');
+                	
+                	redirect($this->module.'/register');
 			}	
 		}
 	}
+
+	//fungsi menangani activation user
+		public function activation($uname=''){
+			$uname = paramDecrypt($uname);
+			$result = $this->udb->user_activation($uname);
+			if($result){
+				$this->session->set_flashdata('flash_message', succ_msg('Akun '.$uname.' telah berhasil diaktivasi')); 
+			}else{
+				$this->session->set_flashdata('flash_message', err_msg('Akun '.$uname.' gagal diaktivasi'));
+			}
+			redirect($this->module.'/'.$this->cname.'/login');
+		}
 }
 /* End of file client.php */
 
