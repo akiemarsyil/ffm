@@ -12,6 +12,31 @@ class M_users extends CI_Model {
 		return $hasil->num_rows();
 	}
 
+	//mencari user berdasar id
+	public function get_user_by_id($param=''){
+		$query = $this->db->get_where('users', array('idUser' => $param));
+		// echo $this->db->last_query();exit;
+		$result = $query->result();
+		return $result;
+	}
+
+	public function edit_user($param=''){
+		$password = paramEncrypt($param['passwd']);
+		$data=array( 'password' => $password,
+					'name' => $param['nama'],
+					'address' => $param['alamat'],
+					'city' => $param['kota'],
+					'email' => $param['email'],
+					'jenis_kelamin' => $param['jk'],
+					'images' => $param['img'],
+					'description' => '',
+					'modified' => $param['reg_date']
+					);
+		$this->db->where('idUser',$param['id']);
+		$query = $this->db->update('users', $data);
+		return $this->db->affected_rows();
+	}
+
 	//menginputkan data registrasi
 	public function add_user($param=''){
 		$password = paramEncrypt($param['passwd']);

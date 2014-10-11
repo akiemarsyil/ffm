@@ -48,7 +48,55 @@ class Client extends MX_Controller {
 	public function dashboard(){
 		$data['cname'] = $this->cname;
 		$data['content'] = $this->load->view('/dashboard',$data,true);
-		$this->load->view('/template',$data);	}
+		$this->load->view('/template',$data);	
+	}
+
+	//melakukan perubahan data pribadi user
+	public function edit_user(){
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+		$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[12]|xss_clean');
+		$this->form_validation->set_rules('passwd', 'Password', 'trim|required|matches[cfPasswd]');
+		$this->form_validation->set_rules('cfPasswd', 'Password Confirmation', 'trim|required');
+
+		if($this->form_validation->run()== FALSE){
+			// echo '0|'.warn_msg(validation_errors());//cara selain session dalam mengirim pesan pemberitahuan
+			$this->session->set_flashdata('flash_message',err_msg(validation_errors()));
+			redirect($_SERVER['HTTP_REFERER']);
+		}else{
+			$param = $this->input->post();
+			$path = "public/assets/uploads/";
+			$member = $this->udb->get_user_by_id($param['id']);
+			// print_r($member);exit;
+			if($param['img_old'] == $member[0]->images){
+				@unlink($path = 'public/assets/uploads/'.$param['img_old']);
+			}
+			if(isset($_FILES['img'])){
+					$valid_formats = array("jpg","png","JPG","PNG");
+					$name = $_FILES['img']['name'];
+					if(strlen($name)){
+						$ext= end(explode(".",$name));
+						if(in_array($ext, $valid_formats)){
+							if(move_uploaded_file($_FILES['img']['tmp_name'], $path.$_FILES['img']['name'])){
+								$param['img'] = $_FILES['img']['name'];	
+							}else{
+								$this->session->set_flashdata('flash_message',err_msg("Failed Upload File"));
+							}
+						}else{
+							$this->session->set_flashdata('flash_message',err_msg("Wrong Format //File"));
+						}
+					}
+				}
+				$param['reg_date'] = date('Y-m-d H:i:s');
+				$edit = $this->udb->edit_user($param);
+				if($edit == true){
+					$this->session->set_flashdata('flash_message',succ_msg('Data berhasil di rubah'));
+				}else{
+					$this->session->set_flashdata('flash_message',err_msg('Terjadi Kesalahan, coba beberapa saat lagi'));
+				}
+			redirect($this->module.'/dashboard');
+		}
+	}
 
 	//fungsi untuk logout
 	public function do_logout(){

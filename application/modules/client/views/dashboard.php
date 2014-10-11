@@ -3,9 +3,9 @@
 	<div class="row">
 		<div class="col-md-3"></div>
 		<div class="col-md-9">
-			<h1>Selamat datang di<strong>Film Fantasy Malang</strong></h1>
+			<h1>Selamat datang di<strong> Film Fantasy Malang</strong></h1>
 			<br>
-
+			<?php echo $this->session->flashdata('flash_message'); ?>
 			<div class="row" id="awal">
 				<!-- menampilkan avatar -->
 				<div class="col-md-3">
@@ -54,13 +54,14 @@
 			<!-- tampilan edit -->
 			<div class="row" id="info">
 				<div class="col-md-8">
-				<?php echo $this->session->flashdata('flash_message'); ?>
-					<form method="post" action="<?php echo base_url().'client/do_register';?>" enctype="multipart/form-data">
+				<!-- <span id="flash_message"></span> -->
+				
+					<form method="post" action="<?php echo base_url().'client/edit_user/';?>" enctype="multipart/form-data">
   						<div class="form-group">
     						<label>Nama</label>
     						<input type="text" class="form-control" id="nama" name="nama" value="<?php echo $user[0]->name;?>">
   						</div>
-  						<div class="form-group">
+  						<div hidden class="form-group">
     						<label>Username</label>
     						<input type="text" class="form-control" id="username" name="username" value="<?php echo $user[0]->username;?>">
   						</div>
@@ -101,12 +102,15 @@
     						<input type="file" id="img" name="img">
     						<span class="help-block">Max file size = 1 Mb</span>
   						</div>
+  						<input type="hidden" id="img_old" name="img_old" class="form-control" value="<?php echo $user[0]->images;?>">
   						<input type="hidden" id="isAktif" name="isAktif" class="form-control" value="yes">
   						<input type="hidden" id="level" name="level" class="form-control" value="0">
+  						<input type="hidden" id="id" name="id" value="<?php echo $user[0]->idUser;?>">
   						<div class="form-group">
   							<div class="row">
                 		        <div class="col-xs-12 text-right">
-                		            <button type="submit" class="btn btn-sm btn-primary"><i class="icon-angle-right"></i> Submit</button>
+                		            <button type="submit" class="btn btn-sm btn-primary" id="ubah"> Edit</button>
+                		            <button type="button" class="btn btn-sm btn-warning" id="batal" onclick="back()"> Batal</button>
                 		        </div>
                 		    </div>
   						</div>
@@ -120,9 +124,24 @@
 </div>
 
 <script type="text/javascript">
-	$("#info").hide();
-	$("#edit").click(function(){
-		$("#awal").hide();
-		$("#info").show();
+	function begin(){
+		var id = '<?php echo $this->uri->segment(2);?>';
+		// alert(id);
+		if(id=='dashboard'){
+			$("#info").hide();
+		}
+	}
+	$(document).ready(function(){//javascript akan di jalankan ketika halaman sudah di load sempurna
+		begin();
+		$("#edit").click(function(){
+			$("#awal").hide();
+			$("#info").show();
+		});
+
+		$("#batal").click(function(){
+			$("#awal").show();
+			$("#info").hide();
+		});
+
 	});
 </script>
