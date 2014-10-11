@@ -26,7 +26,7 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<?php 
-					if(isset($user)){
+					if($user != null){
 				?>
 				<li><a href="<?php echo base_url().'client/dashboard';?>">Wellcome, <?php echo strtoupper($user[0]->username); ?></a></li>
 				<li><a href="<?php echo base_url().'client/do_logout';?>">Logout</a></li>

@@ -40,7 +40,8 @@ class Client extends MX_Controller {
 
 	//fungsi untuk logout
 	public function do_logout(){
-
+		$this->session->unset_userdata('swhpsession');
+		redirect($this->modul);
 	}
 
 	//menampilkan halaman registrasi
