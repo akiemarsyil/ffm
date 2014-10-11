@@ -30,7 +30,6 @@ class Client extends MX_Controller {
 	public function do_login(){
 		$param = $this->input->post();
 		$login = $this->udb->login($param);
-		print_r($login);exit;
 		if ($login != null) {
 			$this->session->set_userdata('swhpsession',$login);
             redirect($this->module);

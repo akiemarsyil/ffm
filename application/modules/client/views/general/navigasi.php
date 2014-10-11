@@ -1,5 +1,6 @@
 <?php
 	$user = $this->session->userdata('swhpsession');
+	// print_r($user);exit;
 ?>
 <div class="jumbotron">
   	<h1>Film Fantasy Malang</h1>
@@ -27,12 +28,12 @@
 				<?php 
 					if(isset($user)){
 				?>
-				<li><a href="<?php echo base_url().'client/login';?>">Login</a></li>
+				<li><a href="<?php echo base_url().'client/dashboard';?>">Wellcome, <?php echo strtoupper($user[0]->username); ?></a></li>
+				<li><a href="<?php echo base_url().'client/do_logout';?>">Logout</a></li>
 				<?php
 					}else{
 				?>
-				<li><a href="<?php echo base_url().'client/dashboard';?>">Wellcome, <?php echo strtoupper($user[0]->username); ?></a></li>
-				<li><a href="<?php echo base_url().'client/do_logout';?>">Logout</a></li>
+				<li><a href="<?php echo base_url().'client/login';?>">Login</a></li>
 				<?php
 					}
 				?>
