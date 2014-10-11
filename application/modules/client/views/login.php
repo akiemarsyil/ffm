@@ -3,7 +3,8 @@
 		<div class="col-md-3"></div>
 		<div class="col-md-4">
 			<h2>Login</h2>
-			<form role="form" method="post" action="<?php base_url().'client/do_login';?>">
+            <?php echo $this->session->flashdata('flash_message'); ?>
+			<form method="post" action="<?php echo base_url().'client/do_login';?>">
   				<div class="form-group">
     				<label>Username</label>
     				<input type="text" class="form-control" id="username" name="username">

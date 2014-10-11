@@ -35,13 +35,26 @@ class M_users extends CI_Model {
 	//untuk merubah status user
 	public function user_activation($uname=''){
 		$this->db->where('username',$uname);
-		$hasil = $this->db->update('users',array('activation'=>'yes'));
+		$hasil = $this->db->update('users',array('isAktif'=>'yes'));
 
 		if($hasil){
 			return $this->db->affected_rows();
 		}else{
 			return false;	
 		} 
+	}
+
+	//menangani login
+	public function login($param=''){
+		$password = paramEncrypt($param['passwd']);
+		$where = array('username' => $param['username'],'password' => $password);
+		$query = $this->db->get_where('users', $where);
+		if($query==NULL){
+			$data=FALSE;
+		} else {
+			$data = $query->result();
+		}
+		return $data;
 	}
 }
 /* End of file m_users.php */

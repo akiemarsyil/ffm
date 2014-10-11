@@ -28,7 +28,15 @@ class Client extends MX_Controller {
 
 	//fungsi menangani ketika login
 	public function do_login(){
-
+		$param = $this->input->post();
+		$login = $this->udb->login($param);
+		print_r($login);exit;
+		if ($login != null) {
+			$this->session->set_userdata('swhpsession',$login);
+            redirect($this->module);
+		}else{
+			$this->session->set_flashdata('flash_message', err_msg('Username atau password salah'));
+		}
 	}
 
 	//fungsi untuk logout
@@ -56,22 +64,30 @@ class Client extends MX_Controller {
 			redirect($_SERVER['HTTP_REFERER']);
 		}else{
 			$param = $this->input->post();
-			$img = $_FILES['img'];
-			$path = base_url().'public/assets/uploads/';
+			$param['img']= 'no_image.jpg';
+			$path = "public/assets/uploads/";
 			$cek = $this->udb->cek_user($param['username'],$param['email']);
 			
 			if($cek){
 				$this->session->set_flashdata('flash_message', err_msg('Registration failed, username or email has been registered'));
 			}else{
-				//masih bermasalah
-				// if($img['name']!=''){
-    //                 $img = save_picture($img['tmp_name'], $img['name'], $path, 0, 0, 0, $img['size'], 7, "img");
-    //                 if($img['error']==1){
-    //                     $this->session->set_flashdata('flash_msg', err_msg('<strong>Error...!</strong><br /> '.$img['msg']));
-    //                     redirect($_SERVER['HTTP_REFERER']);
-    //                 }
-    //             }
-                $param['img'] = $img['nama_file'] ? $img['nama_file'] : 'no_image.jpg';
+				if(isset($_FILES['img'])){
+					$valid_formats = array("jpg","png","JPG","PNG");
+					$name = $_FILES['img']['name'];
+					if(strlen($name)){
+						$ext= end(explode(".",$name));
+						if(in_array($ext, $valid_formats)){
+							if(move_uploaded_file($_FILES['img']['tmp_name'], $path.$_FILES['img']['name'])){
+								$param['img'] = $_FILES['img']['name'];	
+							}else{
+								$this->session->set_flashdata('flash_message',err_msg("Failed Upload File"));
+							}
+						}else{
+							$this->session->set_flashdata('flash_message',err_msg("Wrong Format //File"));
+						}
+					}
+				}
+
                 $param['reg_date'] = date('Y-m-d H:i:s');
                 
                 $save = $this->udb->add_user($param);
@@ -96,7 +112,7 @@ class Client extends MX_Controller {
 		}
 	}
 
-	//fungsi menangani activation user
+		//fungsi menangani activation user
 		public function activation($uname=''){
 			$uname = paramDecrypt($uname);
 			$result = $this->udb->user_activation($uname);
