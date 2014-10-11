@@ -12,7 +12,15 @@ class Ticket extends MX_Controller {
 
 	//menampilkan halaman awal menu ticket
 	public function index(){
-
+		//percobaan
+		$user = $this->session->userdata('swhpsession');
+		if($user != null){
+			redirect($this->modul.'/'.$this->cname);
+		}else{
+			$data['title'] = 'Permission Denied';
+			$data['content'] = $this->load->view('/permission_denied',$data,true);
+			$this->load->view('/template',$data);
+		}
 	}
 
 	//menampilkan judul film yang tersedia pada bioskop

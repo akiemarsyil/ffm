@@ -12,7 +12,15 @@ class Forum extends MX_Controller {
 
 	//menampilkan halaman awal forum
 	public function index(){
-
+		//percobaan
+		$user = $this->session->userdata('swhpsession');
+		if($user != null){
+			redirect($this->modul.'/'.$this->cname);
+		}else{
+			$data['title'] = 'Permission Denied';
+			$data['content'] = $this->load->view('/permission_denied',$data,true);
+			$this->load->view('/template',$data);
+		}
 	}
 
 	//mengambil semua data forum

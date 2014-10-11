@@ -19,8 +19,8 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-left">
 				<li class="active"><a href="<?php base_url();?>">Home</a></li>
-				<li><a href="<?php echo base_url();?>">Reservasi Tiket</a></li>
-				<li><a href="<?php echo base_url();?>">Forum</a></li>
+				<li><a href="<?php echo base_url().'client/ticket';?>">Reservasi Tiket</a></li>
+				<li><a href="<?php echo base_url().'client/forum';?>">Forum</a></li>
 				<li><a href="<?php echo base_url();?>">Informasi Bioskop</a></li>
 				<li><a href="<?php echo base_url();?>">Jadwal Film</a></li>
 			</ul>

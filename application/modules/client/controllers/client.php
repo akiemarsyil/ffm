@@ -44,6 +44,12 @@ class Client extends MX_Controller {
 		}
 	}
 
+	//menampilkan halaman dashboard member
+	public function dashboard(){
+		$data['cname'] = $this->cname;
+		$data['content'] = $this->load->view('/dashboard',$data,true);
+		$this->load->view('/template',$data);	}
+
 	//fungsi untuk logout
 	public function do_logout(){
 		$this->session->unset_userdata('swhpsession');
