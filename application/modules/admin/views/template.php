@@ -8,7 +8,12 @@
 <body>
 <?php $this->load->view('/general/navigasi'); ?>
 
-<?php echo $content; ?>
+<div class="container">
+	<?php $this->load->view('general/sidebar',''); ?>
+	<div class="col-md-9">
+		<?php echo $content; ?>
+	</div>
+</div>
 
 <?php $this->load->view('/general/footer'); ?>
 </div>
