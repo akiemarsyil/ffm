@@ -26,8 +26,6 @@ class M_admin_cinemas extends CI_Model {
 		$data=array( 'name' => $param['name'],
 					'address' => $param['address'],
 					'images' => $param['images'],
-					'created' => '',
-					'created_by' => '',
 					'modified' => $param['modified'],
 					'modified_by' => $param['modified_by'],
 					'description' => $param['description'],
@@ -35,6 +33,12 @@ class M_admin_cinemas extends CI_Model {
 					);
 		$this->db->where('idCinemas',$param['id_current']);
 		$sql = $this->db->update('cinemas', $data);
+		return $this->db->affected_rows();
+	}
+
+	//menghapus bioskop
+	public function delete_bioskop($id=''){
+		$sql = $this->db->delete('cinemas',array('idCinemas'=>$id));
 		return $this->db->affected_rows();
 	}
 

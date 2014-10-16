@@ -39,7 +39,7 @@
 										<a href="<?php echo base_url($this->cname).'/form_bioskop/'.$value->idCinemas; ?>"><span class="label label-success">
                                 	        <i class="icon-pencil icon-white"></i> Edit</span>
                                 	    </a>
-                                	    <a href="<?php //echo base_url($this->cname).'/delete/'.$value->content_id; ?>">
+                                	    <a href="<?php echo base_url($this->cname).'/delete_bioskop/'.$value->idCinemas; ?>">
                                 	        <span class="label label-danger"><i class="icon-remove icon-white"></i> Delete</span>
                                 	    </a>
                                 	</td>

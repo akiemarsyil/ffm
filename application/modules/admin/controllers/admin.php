@@ -130,7 +130,7 @@ class Admin extends MX_Controller {
 					}
 				}
 			//MENGHAPUS GAMBAR LAMA
-			if (!empty($param['img_old'])) {
+			if ($param['img_old']!=$param['images']) {
 				$filename = $param['img_old']; 
 				@unlink($path.$filename);
 			}
@@ -147,7 +147,13 @@ class Admin extends MX_Controller {
 
 	//delete bioskop
 	public function delete_bioskop($id=''){
-
+		$hasil = $this->acdb->delete_bioskop($id);
+		if($hasil == true){
+			$this->session->set_flashdata('flash_message',succ_msg('Data berhasil di Hapus'));
+		}else{
+			$this->session->set_flashdata('flash_message',err_msg('Terjadi Kesalahan, coba beberapa saat lagi'));
+		}
+		redirect($this->module.'/bioskop');
 	}
 }
 /* End of file admin.php */

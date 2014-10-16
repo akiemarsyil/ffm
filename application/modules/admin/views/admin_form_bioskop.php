@@ -62,7 +62,7 @@
 							<input hidden id="id_current" name="id_current" value="<?php echo @$bioskop[0]->idCinemas;?>">
 							<!-- Tombol aksi -->
 							<button type="submit" class="btn btn-primary">Simpan</button>
-							<a href="<?php echo base_url($this->cname); ?>" class="btn btn-warning">Batal</a>
+							<a href="<?php echo base_url($this->cname).'/bioskop'; ?>" class="btn btn-warning">Batal</a>
 						</div>
 					</form>
 				</div>
