@@ -34,6 +34,7 @@ class Admin extends MX_Controller {
 	public function bioskop(){
 		$data['cname'] = $this->cname;
 		$data['title'] = "List Data Bioskop | Master Bioskop";
+		$data['bioskop'] = $this->acdb->get_bioskop();
 		$data['content'] = $this->load->view('/admin_bioskop',$data,TRUE);
 		$this->load->view('/template', $data);
 	}
@@ -85,7 +86,7 @@ class Admin extends MX_Controller {
 				}else{
 					$this->session->set_flashdata('flash_message',err_msg('Terjadi Kesalahan, coba beberapa saat lagi'));
 				}
-        	redirect($this->module.'/admin_bioskop');
+        	redirect($this->module.'/bioskop');
         }
 	}
 }

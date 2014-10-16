@@ -20,6 +20,12 @@ class M_admin_cinemas extends CI_Model {
 		$result=$this->db->insert('cinemas',$data);
 		return $this->db->affected_rows();
 	}
+
+	//menampilkan daftar bioskop
+	public function get_bioskop(){
+		$sql = $this->db->get('cinemas');
+		return $sql->result();
+	}
 }
 /* End of file m_admin_cinemas.php */
 
