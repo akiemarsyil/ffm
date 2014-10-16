@@ -36,7 +36,7 @@
 									<td><?php echo $value->telephone;?></td>
 									<td><?php echo $value->address;?></td>
 									<td>
-										<a href="<?php //echo base_url($this->cname).'/form/'.$value->content_id; ?>"><span class="label label-success">
+										<a href="<?php echo base_url($this->cname).'/form_bioskop/'.$value->idCinemas; ?>"><span class="label label-success">
                                 	        <i class="icon-pencil icon-white"></i> Edit</span>
                                 	    </a>
                                 	    <a href="<?php //echo base_url($this->cname).'/delete/'.$value->content_id; ?>">
