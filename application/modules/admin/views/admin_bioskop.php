@@ -37,10 +37,10 @@
 									<td><?php echo $value->address;?></td>
 									<td>
 										<a href="<?php echo base_url($this->cname).'/form_bioskop/'.$value->idCinemas; ?>"><span class="label label-success">
-                                	        <i class="icon-pencil icon-white"></i> Edit</span>
+                                	        <i class="glyphicon glyphicon-pencil"></i> Edit</span>
                                 	    </a>
                                 	    <a href="<?php echo base_url($this->cname).'/delete_bioskop/'.$value->idCinemas; ?>">
-                                	        <span class="label label-danger"><i class="icon-remove icon-white"></i> Delete</span>
+                                	        <span class="label label-danger"><i class="glyphicon glyphicon-remove"></i> Delete</span>
                                 	    </a>
                                 	</td>
 								</tr>

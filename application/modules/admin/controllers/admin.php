@@ -114,6 +114,7 @@ class Admin extends MX_Controller {
 			redirect($_SERVER['HTTP_REFERER']);
         } else {
         	if(isset($_FILES['images'])){
+        			// @unlink($path.$param['img_old']);
 					$valid_formats = array("jpg","png","JPG","PNG");
 					$name = $_FILES['images']['name'];
 					if(strlen($name)){
@@ -129,11 +130,6 @@ class Admin extends MX_Controller {
 						}
 					}
 				}
-			//MENGHAPUS GAMBAR LAMA
-			if ($param['img_old']!=$param['images']) {
-				$filename = $param['img_old']; 
-				@unlink($path.$filename);
-			}
         	$param['modified'] =  date('Y-m-d H:i:s');
         	$edit = $this->acdb->edit_bioskop($param);
         	if($edit == true){
