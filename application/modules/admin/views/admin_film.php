@@ -5,9 +5,9 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<blockquote>
-								<p><i class="icon-file-text"></i> Data Bioskop</p>
+								<p><i class="icon-file-text"></i> Data Film</p>
 							</blockquote>
-							<a href="<?php echo base_url($this->module).'/admin_master/form_bioskop'; ?>" class="btn btn-success">
+							<a href="<?php echo base_url($this->module).'/admin_master/form_film'; ?>" class="btn btn-success">
 								<i class="icon-plus icon-white"></i> Add
 							</a><br><br>
 						</div>
@@ -18,28 +18,28 @@
 								<tr>
 									<th width="10px" class="text-center">No</th>
 									<th width="100px">Nama</th>
-									<th width="200px">Keterangan</th>
-									<th width="150px">No Telp</th>
-									<th width="200">Alamat</th>
+									<th width="200px">Direktor</th>
+									<th width="150px">Kategori</th>
+									<th width="200">Review</th>
 									<th class="text-center" width="120px">Aksi</th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php
 									$i=1;
-									foreach ($bioskop as $key => $value) {
+									foreach ($film as $key => $value) {
 								?>
 								<tr>
 									<td><?php echo $i;?></td>
 									<td><?php echo $value->name;?></td>
-									<td><?php echo $value->description;?></td>
-									<td><?php echo $value->telephone;?></td>
-									<td><?php echo $value->address;?></td>
+									<td><?php echo $value->director;?></td>
+									<td><?php echo $value->categories;?></td>
+									<td><?php echo $value->content;?></td>
 									<td>
-										<a href="<?php echo base_url($this->module).'/admin_master/form_bioskop/'.$value->idCinemas; ?>"><span class="label label-success">
+										<a href="<?php echo base_url($this->module).'/admin_master/form_film/'.$value->idCinemas; ?>"><span class="label label-success">
                                 	        <i class="glyphicon glyphicon-pencil"></i> Edit</span>
                                 	    </a>
-                                	    <a href="<?php echo base_url($this->module).'/admin_master/delete_bioskop/'.$value->idCinemas; ?>">
+                                	    <a href="<?php echo base_url($this->module).'/admin_master/delete_film/'.$value->idCinemas; ?>">
                                 	        <span class="label label-danger"><i class="glyphicon glyphicon-remove"></i> Delete</span>
                                 	    </a>
                                 	</td>

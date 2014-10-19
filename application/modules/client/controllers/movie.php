@@ -15,6 +15,11 @@ class Movie extends MX_Controller {
 
 	}
 
+	//menampilkan film berdasar sorting tanggal
+	public function load_cinema(){
+
+	}
+
 	//menampilkan halaman awal lokasi bioskop
 	public function movie(){
 
@@ -33,6 +38,11 @@ class Movie extends MX_Controller {
 	//menampilkan komentar terhadap bioskop
 	public function comment(){
 		
+	}
+
+	//melakukan komen terhadap bioskop
+	public function do_comment(){
+
 	}
 }
 /* End of file movie.php */

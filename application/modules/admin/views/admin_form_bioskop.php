@@ -14,11 +14,11 @@
 						if($aksi == 'add'){
 
 					?>
-					<form action="<?php echo base_url().'admin/tambah_bioskop';?>" method="post" enctype="multipart/form-data">
+					<form action="<?php echo base_url($this->module).'/admin_master/tambah_bioskop';?>" method="post" enctype="multipart/form-data">
 					<?php 
 						}else{
 					?>
-					<form action="<?php echo base_url().'admin/edit_bioskop';?>" method="post" enctype="multipart/form-data">
+					<form action="<?php echo base_url($this->module).'/admin_master/edit_bioskop';?>" method="post" enctype="multipart/form-data">
 					<?php } ?>
 						<div class="form-group">
 							<div class="input-group">
@@ -62,7 +62,7 @@
 							<input hidden id="id_current" name="id_current" value="<?php echo @$bioskop[0]->idCinemas;?>">
 							<!-- Tombol aksi -->
 							<button type="submit" class="btn btn-primary">Simpan</button>
-							<a href="<?php echo base_url($this->cname).'/bioskop'; ?>" class="btn btn-warning">Batal</a>
+							<a href="<?php echo base_url($this->module).'/bioskop'; ?>" class="btn btn-warning">Batal</a>
 						</div>
 					</form>
 				</div>

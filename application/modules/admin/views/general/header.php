@@ -16,3 +16,5 @@
 <script src="<?php echo base_url().'public/assets/js/jquery.dataTables.js';?>" type="text/javascript"></script>
 <link href="<?php echo base_url().'public/assets/css/jquery.dataTables.css';?>" rel="stylesheet" type="text/css" media="screen"/>
 
+<script src="<?php echo base_url().'public/assets/js/jquery-ui.js';?>" type="text/javascript"></script>
+
