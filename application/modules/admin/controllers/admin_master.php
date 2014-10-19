@@ -8,6 +8,7 @@ class Admin_master extends MX_Controller {
 		$this->module='admin';
 		$this->cname='admin_master';
 		$this->load->model('m_admin_cinemas','acdb');
+		$this->load->model('m_admin_movies','amdb');
 	}
 
 	//menampilkan form tambah atau edit bioskop
@@ -121,6 +122,23 @@ class Admin_master extends MX_Controller {
 			$this->session->set_flashdata('flash_message',err_msg('Terjadi Kesalahan, coba beberapa saat lagi'));
 		}
 		redirect($this->module.'/bioskop');
+	}
+
+	//menampilkan form tambah atau edit film
+	public function form_film($id=''){
+		$data['cname'] = $this->cname;
+		$data['title'] = "Tambah Film";
+		$data['aksi'] = 'add';
+		$data['bioskop'] = $this->acdb->get_bioskop();
+		// print_r($data);exit;
+		if($id){
+			$content = $this->amdb->get_film_by_id($id);
+			$data['film'] = $content;
+			$data['title'] = 'Edit Bioskop';
+			$data['aksi'] = 'edit';
+		}
+		$data['content'] = $this->load->view('/admin_form_film',$data,TRUE);
+		$this->load->view('/template', $data);
 	}
 }
 /* End of file admin_master.php */

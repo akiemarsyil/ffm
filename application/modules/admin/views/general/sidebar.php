@@ -15,7 +15,7 @@
     					<div id="collapseOne" class="panel-collapse collapse">
     						<ul>
     							<li><a href="<?php echo base_url().'admin/bioskop';?>">Bioskop</a></li>
-    							<li><a href="#">Film</a></li>
+    							<li><a href="<?php echo base_url().'admin/film';?>">Film</a></li>
     							<li><a href="#">Ticket</a></li>
     						</ul>
     					</div>
