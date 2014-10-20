@@ -140,6 +140,49 @@ class Admin_master extends MX_Controller {
 		$data['content'] = $this->load->view('/admin_form_film',$data,TRUE);
 		$this->load->view('/template', $data);
 	}
+
+	//insert film baru
+	public function tambah_film(){
+		$param = $this->input->post();
+		$path = "public/assets/movie/";
+		$user = $this->session->userdata('swhpsession');
+		$param['created_by'] = $user[0]->username;
+		// print_r($param);exit;
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('name', 'Nama', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('director', 'Direktor', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('categories', 'Kategori', 'trim|required|xss_clean');
+		if ($this->form_validation->run() == FALSE) {
+            //tidak memenuhi validasi
+            $this->session->set_flashdata('flash_message',err_msg(validation_errors()));
+			redirect($_SERVER['HTTP_REFERER']);
+        } else {
+        	if(isset($_FILES['images'])){
+					$valid_formats = array("jpg","png","JPG","PNG");
+					$name = $_FILES['images']['name'];
+					if(strlen($name)){
+						$ext= end(explode(".",$name));
+						if(in_array($ext, $valid_formats)){
+							if(move_uploaded_file($_FILES['images']['tmp_name'], $path.$_FILES['images']['name'])){
+								$param['images'] = $_FILES['images']['name'];	
+							}else{
+								$this->session->set_flashdata('flash_message',err_msg("Failed Upload File"));
+							}
+						}else{
+							$this->session->set_flashdata('flash_message',err_msg("Wrong Format //File"));
+						}
+					}
+				}
+        	$param['created'] =  date('Y-m-d H:i:s');
+        	$save = $this->amdb->simpan_film($param);
+        	if($save == true){
+					$this->session->set_flashdata('flash_message',succ_msg('Data berhasil di Tambahkan'));
+				}else{
+					$this->session->set_flashdata('flash_message',err_msg('Terjadi Kesalahan, coba beberapa saat lagi'));
+				}
+        	redirect($this->module.'/film');
+        }
+	}
 }
 /* End of file admin_master.php */
 

@@ -36,10 +36,10 @@
 									<td><?php echo $value->categories;?></td>
 									<td><?php echo $value->content;?></td>
 									<td>
-										<a href="<?php echo base_url($this->module).'/admin_master/form_film/'.$value->idCinemas; ?>"><span class="label label-success">
+										<a href="<?php echo base_url($this->module).'/admin_master/form_film/'.$value->idMovies; ?>"><span class="label label-success">
                                 	        <i class="glyphicon glyphicon-pencil"></i> Edit</span>
                                 	    </a>
-                                	    <a href="<?php echo base_url($this->module).'/admin_master/delete_film/'.$value->idCinemas; ?>">
+                                	    <a href="<?php echo base_url($this->module).'/admin_master/delete_film/'.$value->idMovies; ?>">
                                 	        <span class="label label-danger"><i class="glyphicon glyphicon-remove"></i> Delete</span>
                                 	    </a>
                                 	</td>

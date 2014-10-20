@@ -16,6 +16,22 @@ class M_admin_movies extends CI_Model {
 		$sql = $this->db->get_where('movies',array('idMovies'=>$id));
 		return $sql->result();
 	}
+
+	//menyimpan data film
+	public function simpan_film($param=''){
+		$data=array('id_cinema' => $param['cinema'],
+					'name' => $param['name'],
+					'director' => $param['director'],
+					'content' => $param['content'],
+					'images' => $param['images'],
+					'categories' => $param['categories'],
+					'play' => $param['play'],
+					'create' => $param['created'],
+					'create_by' => $param['created_by']
+					);
+		$result=$this->db->insert('movies',$data);
+		return $this->db->affected_rows();
+	}
 }
 /* End of file m_admin_movies.php */
 

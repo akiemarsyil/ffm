@@ -14,11 +14,11 @@
 						if($aksi == 'add'){
 
 					?>
-					<form action="<?php echo base_url($this->module).'/admin_master/tambah_bioskop';?>" method="post" enctype="multipart/form-data">
+					<form action="<?php echo base_url($this->module).'/admin_master/tambah_film';?>" method="post" enctype="multipart/form-data">
 					<?php 
 						}else{
 					?>
-					<form action="<?php echo base_url($this->module).'/admin_master/edit_bioskop';?>" method="post" enctype="multipart/form-data">
+					<form action="<?php echo base_url($this->module).'/admin_master/edit_film';?>" method="post" enctype="multipart/form-data">
 					<?php } ?>
 						<div class="form-group">
 							<div class="input-group">
@@ -63,6 +63,7 @@
   							<div class="input-group">
   								<span class="input-group-addon">Tanggal Tayang</span>
   								<input type="text" id="play" name="play" class="form-control date-picker text-center" placeholder="Tanggal Tayang">
+  								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
   							</div>
 							<br>
 							<div class="input-group">
@@ -78,11 +79,11 @@
 						</div>
 						<div class="form-group">
 							<!-- Untuk menu edit -->
-							<input hidden id="img_old" name="img_old" value="<?php echo @$bioskop[0]->images;?>">
-							<input hidden id="id_current" name="id_current" value="<?php echo @$bioskop[0]->idCinemas;?>">
+							<input hidden id="img_old" name="img_old" value="<?php echo @$film[0]->images;?>">
+							<input hidden id="id_current" name="id_current" value="<?php echo @$film[0]->idMovies;?>">
 							<!-- Tombol aksi -->
 							<button type="submit" class="btn btn-primary">Simpan</button>
-							<a href="<?php echo base_url($this->module).'/bioskop'; ?>" class="btn btn-warning">Batal</a>
+							<a href="<?php echo base_url($this->module).'/film'; ?>" class="btn btn-warning">Batal</a>
 						</div>
 					</form>
 				</div>
@@ -90,9 +91,8 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		// $(document).ready(
-		// 	function(){
+		$(document).ready(
+			function(){
     			$( ".date-picker" ).datepicker();
-  // 			});
-		// })
+  			});
 	</script>
