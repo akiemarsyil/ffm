@@ -32,6 +32,29 @@ class M_admin_movies extends CI_Model {
 		$result=$this->db->insert('movies',$data);
 		return $this->db->affected_rows();
 	}
+
+	//melakukan perubahan data film
+	public function edit_film($param=''){
+		$data=array('id_cinema' => $param['cinema'],
+					'name' => $param['name'],
+					'director' => $param['director'],
+					'content' => $param['content'],
+					'images' => $param['images'],
+					'categories' => $param['categories'],
+					'play' => $param['play'],
+					'modifed' => $param['modified'],
+					'modified_by' => $param['modified_by']
+					);
+		$this->db->where('idMovies',$param['id_current']);
+		$sql = $this->db->update('movies', $data);
+		return $this->db->affected_rows();
+	}
+
+	//menghapus film
+	public function delete_film($id=''){
+		$sql = $this->db->delete('movies',array('idMovies'=>$id));
+		return $this->db->affected_rows();
+	}
 }
 /* End of file m_admin_movies.php */
 
