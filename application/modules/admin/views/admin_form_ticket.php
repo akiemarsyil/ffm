@@ -5,7 +5,7 @@
 					<div class="row">
 						<div class="col-sm-4">
 							<blockquote>
-								<p><i class="icon-file-text"></i> Pendaftaran Bioskop Malang</p>
+								<p><i class="icon-file-text"></i> Pendaftaran Ticket Bioskop Malang</p>
 							</blockquote>
 						</div>
 					</div>
@@ -14,59 +14,64 @@
 						if($aksi == 'add'){
 
 					?>
-					<form action="<?php echo base_url($this->module).'/admin_master/tambah_film';?>" method="post" enctype="multipart/form-data">
+					<form action="<?php echo base_url($this->module).'/admin_master/tambah_ticket';?>" method="post" enctype="multipart/form-data">
 					<?php 
 						}else{
 					?>
-					<form action="<?php echo base_url($this->module).'/admin_master/edit_film';?>" method="post" enctype="multipart/form-data">
+					<form action="<?php echo base_url($this->module).'/admin_master/edit_ticket';?>" method="post" enctype="multipart/form-data">
 					<?php } ?>
 						<div class="form-group">
 							<div class="input-group">
-								<span class="input-group-addon">Nama</span>
-								<input type="text" id="name" name="name" value="<?php echo @$film[0]->name; ?>" class="form-control">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-expand"></i></span>
-							</div>
-							<br>
-							<div class="input-group">
-								<span class="input-group-addon">Direktor</span>
-								<input type="text" id="director" name="director" value="<?php echo @$film[0]->director; ?>" class="form-control">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-							</div>
-							<br>
-							<div class="input-group">
-								<span class="input-group-addon">Kategori</span>
-								<input type="text" id="categories" name="categories" value="<?php echo @$film[0]->categories; ?>" class="form-control">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-tags"></i></span>
-							</div>
-							<br>
-							<div class="input-group">
-								<span class="input-group-addon">Keterangan</span>
-								<textarea id="content" name="content" class="form-control"><?php echo @$film[0]->content; ?></textarea>
-								<span class="input-group-addon"><i class="glyphicon glyphicon-pushpin"></i></span>
-							</div>
-							<br>
-							<div class="input-group">
-  								<span class="input-group-addon">Bioskop</span>
+  								<span class="input-group-addon">Nama Film</span>
   								<select name="cinema" class="form-control">
-  									<option value=""></option>
+  									<option value="<?php echo @$ticket[0]->nama; ?>"></option>
   									<?php
-  										foreach ($bioskop as $key => $value):
+  										foreach ($film as $key => $value):
   									?>
-  									<option value="<?php echo $value->idCinemas; ?>"><?php echo $value->name; ?></option>
+  									<option value="<?php echo $value->idMovies.'|'.$value->name; ?>"><?php echo $value->name; ?></option>
   									<?php
   										endforeach
   									?>
   								</select>
   								<span class="input-group-addon"><i class="glyphicon glyphicon-film"></i></span>
   							</div>
+							<br>
+							<div class="input-group">
+								<span class="input-group-addon">Harga</span>
+								<input type="text" id="harga" name="harga" value="<?php echo @$ticket[0]->harga; ?>" class="form-control">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+							</div>
+							<br>
+							<div class="input-group">
+  								<span class="input-group-addon">Bioskop</span>
+  								<select name="cinema" class="form-control">
+  									<option value="<?php echo @$ticket[0]->bioskop; ?>"></option>
+  									<?php
+  										foreach ($bioskop as $key => $value):
+  									?>
+  									<option value="<?php echo $value->idCinemas.'|'.$value->name; ?>"><?php echo $value->name; ?></option>
+  									<?php
+  										endforeach
+  									?>
+  								</select>
+  								<span class="input-group-addon"><i class="glyphicon glyphicon-film"></i></span>
+  							</div>
+							<br>
+							<div class="input-group">
+								<span class="input-group-addon">Stock</span>
+								<input type="text" id="stock" name="stock" class="form-control" value="<?php echo @$ticket[0]->stock; ?>">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-pushpin"></i></span>
+							</div>
+							<br>
+							<!-- 
   							<br>
   							<div class="input-group">
   								<span class="input-group-addon">Tanggal Tayang</span>
   								<input type="text" id="play" name="play" class="form-control date-picker text-center" placeholder="Tanggal Tayang">
   								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
   							</div>
-							<br>
-							<div class="input-group">
+							<br> -->
+							<!-- <div class="input-group">
     							<label>Image</label>
     							<?php 
     								if(@$film[0]->images){
@@ -75,15 +80,15 @@
     							<?php } ?>
     							<input type="file" id="images" name="images">
     							<span class="help-block">Max file size = 1 Mb</span>
-  							</div>
+  							</div> -->
 						</div>
 						<div class="form-group">
 							<!-- Untuk menu edit -->
-							<input hidden id="img_old" name="img_old" value="<?php echo @$film[0]->images;?>">
-							<input hidden id="id_current" name="id_current" value="<?php echo @$film[0]->idMovies;?>">
+							<!-- <input hidden id="img_old" name="img_old" value="<?php echo @$ticket[0]->images;?>"> -->
+							<input hidden id="id_current" name="id_current" value="<?php echo @$ticket[0]->id;?>">
 							<!-- Tombol aksi -->
 							<button type="submit" class="btn btn-primary">Simpan</button>
-							<a href="<?php echo base_url($this->module).'/film'; ?>" class="btn btn-warning">Batal</a>
+							<a href="<?php echo base_url($this->module).'/ticket'; ?>" class="btn btn-warning">Batal</a>
 						</div>
 					</form>
 				</div>
@@ -91,8 +96,8 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		$(document).ready(
-			function(){
-    			$( ".date-picker" ).datepicker();
-  			});
+		// $(document).ready(
+		// 	function(){
+  //   			$( ".date-picker" ).datepicker();
+  // 			});
 	</script>

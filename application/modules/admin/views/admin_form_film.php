@@ -5,7 +5,7 @@
 					<div class="row">
 						<div class="col-sm-4">
 							<blockquote>
-								<p><i class="icon-file-text"></i> Pendaftaran Bioskop Malang</p>
+								<p><i class="icon-file-text"></i> Pendaftaran Film Malang</p>
 							</blockquote>
 						</div>
 					</div>

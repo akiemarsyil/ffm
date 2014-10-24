@@ -27,7 +27,7 @@
 							<tbody>
 								<?php
 									$i=1;
-									foreach ($film as $key => $value) {
+									foreach ($ticket as $key => $value) {
 								?>
 								<tr>
 									<td><?php echo $i;?></td>
@@ -36,10 +36,10 @@
 									<td><?php echo $value->bioskop;?></td>
 									<td><?php echo $value->stock;?></td>
 									<td>
-										<a href="<?php echo base_url($this->module).'/admin_master/form_ticket/'.$value->idMovies; ?>"><span class="label label-success">
+										<a href="<?php echo base_url($this->module).'/admin_master/form_ticket/'.$value->id; ?>"><span class="label label-success">
                                 	        <i class="glyphicon glyphicon-pencil"></i> Edit</span>
                                 	    </a>
-                                	    <a href="<?php echo base_url($this->module).'/admin_master/delete_ticket/'.$value->idMovies; ?>">
+                                	    <a href="<?php echo base_url($this->module).'/admin_master/delete_ticket/'.$value->id; ?>">
                                 	        <span class="label label-danger"><i class="glyphicon glyphicon-remove"></i> Delete</span>
                                 	    </a>
                                 	</td>

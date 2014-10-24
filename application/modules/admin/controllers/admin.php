@@ -54,7 +54,7 @@ class Admin extends MX_Controller {
 	public function ticket(){
 		$data['cname'] = $this->cname;
 		$data['title'] = "List Data Ticket | Master Ticket";
-		$data['film'] = $this->atdb->get_ticket();
+		$data['ticket'] = $this->atdb->get_ticket();
 		$data['content'] = $this->load->view('/admin_ticket',$data,TRUE);
 		$this->load->view('/template',$data);
 	}

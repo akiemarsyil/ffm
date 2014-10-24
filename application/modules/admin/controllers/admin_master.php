@@ -9,6 +9,7 @@ class Admin_master extends MX_Controller {
 		$this->cname='admin_master';
 		$this->load->model('m_admin_cinemas','acdb');
 		$this->load->model('m_admin_movies','amdb');
+		$this->load->model('m_admin_ticket','atdb');
 	}
 
 	//menampilkan form tambah atau edit bioskop
@@ -244,7 +245,8 @@ class Admin_master extends MX_Controller {
 		$data['cname'] = $this->cname;
 		$data['title'] = "Tambah Ticket";
 		$data['aksi'] = 'add';
-		$data['bioskop'] = $this->atdb->get_ticket();
+		$data['bioskop'] = $this->acdb->get_bioskop();
+		$data['film'] = $this->amdb->get_film();
 		// print_r($data);exit;
 		if($id){
 			$content = $this->atdb->get_ticket_by_id($id);
