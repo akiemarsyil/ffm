@@ -238,6 +238,121 @@ class Admin_master extends MX_Controller {
 		}
 		redirect($this->module.'/film');
 	}
+
+	//menampilkan form tambah atau edit ticket
+	public function form_ticket($id=''){
+		$data['cname'] = $this->cname;
+		$data['title'] = "Tambah Ticket";
+		$data['aksi'] = 'add';
+		$data['bioskop'] = $this->atdb->get_ticket();
+		// print_r($data);exit;
+		if($id){
+			$content = $this->atdb->get_ticket_by_id($id);
+			$data['film'] = $content;
+			$data['title'] = 'Edit Ticket';
+			$data['aksi'] = 'edit';
+		}
+		$data['content'] = $this->load->view('/admin_form_ticket',$data,TRUE);
+		$this->load->view('/template', $data);
+	}
+
+	//insert ticket baru
+	public function tambah_ticket(){
+		$param = $this->input->post();
+		// $path = "public/assets/movie/";
+		$user = $this->session->userdata('swhpsession');
+		$param['created_by'] = $user[0]->username;
+		// print_r($param);exit;
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('name', 'Nama', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('director', 'Direktor', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('categories', 'Kategori', 'trim|required|xss_clean');
+		if ($this->form_validation->run() == FALSE) {
+            //tidak memenuhi validasi
+            $this->session->set_flashdata('flash_message',err_msg(validation_errors()));
+			redirect($_SERVER['HTTP_REFERER']);
+        } else {
+    //     	if(isset($_FILES['images'])){
+				// 	$valid_formats = array("jpg","png","JPG","PNG");
+				// 	$name = $_FILES['images']['name'];
+				// 	if(strlen($name)){
+				// 		$ext= end(explode(".",$name));
+				// 		if(in_array($ext, $valid_formats)){
+				// 			if(move_uploaded_file($_FILES['images']['tmp_name'], $path.$_FILES['images']['name'])){
+				// 				$param['images'] = $_FILES['images']['name'];	
+				// 			}else{
+				// 				$this->session->set_flashdata('flash_message',err_msg("Failed Upload File"));
+				// 			}
+				// 		}else{
+				// 			$this->session->set_flashdata('flash_message',err_msg("Wrong Format //File"));
+				// 		}
+				// 	}
+				// }
+        	$param['created'] =  date('Y-m-d H:i:s');
+        	$save = $this->atdb->simpan_ticket($param);
+        	if($save == true){
+					$this->session->set_flashdata('flash_message',succ_msg('Data berhasil di Tambahkan'));
+				}else{
+					$this->session->set_flashdata('flash_message',err_msg('Terjadi Kesalahan, coba beberapa saat lagi'));
+				}
+        	redirect($this->module.'/ticket');
+        }
+	}
+
+	//edit ticket
+	public function edit_ticket($id=''){
+		$param = $this->input->post();
+		// $path = "public/assets/movie/";
+		$user = $this->session->userdata('swhpsession');
+		$param['modified_by'] = $user[0]->username;
+
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('name', 'Nama', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('director', 'director', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('categories', 'Kategori', 'trim|required|xss_clean');
+		if ($this->form_validation->run() == FALSE) {
+            //tidak memenuhi validasi
+            $this->session->set_flashdata('flash_message',err_msg(validation_errors()));
+			redirect($_SERVER['HTTP_REFERER']);
+        } else {
+    //     	if(isset($_FILES['images'])){
+    //     			// @unlink($path.$param['img_old']);
+				// 	$valid_formats = array("jpg","png","JPG","PNG");
+				// 	$name = $_FILES['images']['name'];
+				// 	if(strlen($name)){
+				// 		$ext= end(explode(".",$name));
+				// 		if(in_array($ext, $valid_formats)){
+				// 			if(move_uploaded_file($_FILES['images']['tmp_name'], $path.$_FILES['images']['name'])){
+				// 				$param['images'] = $_FILES['images']['name'];	
+				// 			}else{
+				// 				$this->session->set_flashdata('flash_message',err_msg("Failed Upload File"));
+				// 			}
+				// 		}else{
+				// 			$this->session->set_flashdata('flash_message',err_msg("Wrong Format //File"));
+				// 		}
+				// 	}
+				// }
+        	$param['modified'] =  date('Y-m-d H:i:s');
+        	$edit = $this->atdb->edit_ticket($param);
+        	if($edit == true){
+					$this->session->set_flashdata('flash_message',succ_msg('Data berhasil di Tambahkan'));
+				}else{
+					$this->session->set_flashdata('flash_message',err_msg('Terjadi Kesalahan, coba beberapa saat lagi'));
+				}
+        	redirect($this->module.'/ticket');
+        }
+	}
+
+	//delete ticket
+	public function delete_ticket($id=''){
+		$hasil = $this->atdb->delete_film($id);
+		if($hasil == true){
+			$this->session->set_flashdata('flash_message',succ_msg('Data berhasil di Hapus'));
+		}else{
+			$this->session->set_flashdata('flash_message',err_msg('Terjadi Kesalahan, coba beberapa saat lagi'));
+		}
+		redirect($this->module.'/ticket');
+	}
 }
 /* End of file admin_master.php */
 

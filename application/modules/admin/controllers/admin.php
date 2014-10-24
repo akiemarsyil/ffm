@@ -10,6 +10,7 @@ class Admin extends MX_Controller {
 		$this->load->model('m_admin_users','audb');
 		$this->load->model('m_admin_cinemas','acdb');
 		$this->load->model('m_admin_movies','amdb');
+		$this->load->model('m_admin_ticket','atdb');
 	}
 
 	//melakukan authentication hanya admin saja yang bisa mengakses halaman admin
@@ -50,8 +51,12 @@ class Admin extends MX_Controller {
 	}
 
 	//menampilkan ticket
-	public function tiket(){
-		
+	public function ticket(){
+		$data['cname'] = $this->cname;
+		$data['title'] = "List Data Ticket | Master Ticket";
+		$data['film'] = $this->atdb->get_ticket();
+		$data['content'] = $this->load->view('/admin_ticket',$data,TRUE);
+		$this->load->view('/template',$data);
 	}
 }
 /* End of file admin.php */
