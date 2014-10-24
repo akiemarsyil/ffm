@@ -11,14 +11,14 @@ class M_admin_ticket extends CI_Model {
 		return $sql->result();
 	}
 
-	//menampilkan daftar film berdasar id
-	public function get_film_by_id($id=''){
-		$sql = $this->db->get_where('movies',array('idMovies'=>$id));
+	//menampilkan daftar ticket berdasar id
+	public function get_ticket_by_id($id=''){
+		$sql = $this->db->get_where('ticket_stock',array('id'=>$id));
 		return $sql->result();
 	}
 
-	//menyimpan data film
-	public function simpan_film($param=''){
+	//menyimpan data ticket
+	public function simpan_ticket($param=''){
 		$data=array('id_cinema' => $param['cinema'],
 					'name' => $param['name'],
 					'director' => $param['director'],
@@ -29,12 +29,12 @@ class M_admin_ticket extends CI_Model {
 					'create' => $param['created'],
 					'create_by' => $param['created_by']
 					);
-		$result=$this->db->insert('movies',$data);
+		$result=$this->db->insert('ticket_stock',$data);
 		return $this->db->affected_rows();
 	}
 
-	//melakukan perubahan data film
-	public function edit_film($param=''){
+	//melakukan perubahan data ticket
+	public function edit_ticket($param=''){
 		$data=array('id_cinema' => $param['cinema'],
 					'name' => $param['name'],
 					'director' => $param['director'],
@@ -45,14 +45,14 @@ class M_admin_ticket extends CI_Model {
 					'modifed' => $param['modified'],
 					'modified_by' => $param['modified_by']
 					);
-		$this->db->where('idMovies',$param['id_current']);
-		$sql = $this->db->update('movies', $data);
+		$this->db->where('id',$param['id_current']);
+		$sql = $this->db->update('ticket_stock', $data);
 		return $this->db->affected_rows();
 	}
 
-	//menghapus film
-	public function delete_film($id=''){
-		$sql = $this->db->delete('movies',array('idMovies'=>$id));
+	//menghapus ticket
+	public function delete_ticket($id=''){
+		$sql = $this->db->delete('ticket_stock',array('id'=>$id));
 		return $this->db->affected_rows();
 	}
 }
