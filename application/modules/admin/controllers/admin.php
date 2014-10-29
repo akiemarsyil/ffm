@@ -20,6 +20,7 @@ class Admin extends MX_Controller {
 		if($user != null){
 			if($param[0]->level == '1'){
 				$data['title'] = 'Welcome';
+				$data['sidebar'] = $this->load->view('/general/sidebar',$data,TRUE);
 				$data['content'] = $this->load->view('/main', $data, TRUE);
 				$this->load->view('admin/template', $data);
 			}else{
