@@ -250,7 +250,8 @@ class Admin_master extends MX_Controller {
 		// print_r($data);exit;
 		if($id){
 			$content = $this->atdb->get_ticket_by_id($id);
-			$data['film'] = $content;
+			// print_r($content);exit;
+			$data['ticket'] = $content;
 			$data['title'] = 'Edit Ticket';
 			$data['aksi'] = 'edit';
 		}
@@ -264,11 +265,18 @@ class Admin_master extends MX_Controller {
 		// $path = "public/assets/movie/";
 		$user = $this->session->userdata('swhpsession');
 		$param['created_by'] = $user[0]->username;
+		// print_r(explode('|',$param['movie']));exit;
+		$movie = explode('|',$param['movie']);
+		$cinema = explode('|',$param['cinema']);
+		$param['film'] = $movie[1];
+		$param['id_film'] = $movie[0];
+		$param['bioskop'] = $cinema[1];
+		$param['id_bioskop'] = $cinema[0];
 		// print_r($param);exit;
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('name', 'Nama', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('director', 'Direktor', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('categories', 'Kategori', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('movie', 'Nama Film', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('harga', 'Harga', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('cinema', 'Bioskop', 'trim|required|xss_clean');
 		if ($this->form_validation->run() == FALSE) {
             //tidak memenuhi validasi
             $this->session->set_flashdata('flash_message',err_msg(validation_errors()));
@@ -307,7 +315,12 @@ class Admin_master extends MX_Controller {
 		// $path = "public/assets/movie/";
 		$user = $this->session->userdata('swhpsession');
 		$param['modified_by'] = $user[0]->username;
-
+		$movie = explode('|',$param['movie']);
+		$cinema = explode('|',$param['cinema']);
+		$param['film'] = $movie[1];
+		$param['id_film'] = $movie[0];
+		$param['bioskop'] = $cinema[1];
+		$param['id_bioskop'] = $cinema[0];
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('name', 'Nama', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('director', 'director', 'trim|required|xss_clean');
@@ -347,7 +360,7 @@ class Admin_master extends MX_Controller {
 
 	//delete ticket
 	public function delete_ticket($id=''){
-		$hasil = $this->atdb->delete_film($id);
+		$hasil = $this->atdb->delete_ticket($id);
 		if($hasil == true){
 			$this->session->set_flashdata('flash_message',succ_msg('Data berhasil di Hapus'));
 		}else{

@@ -19,15 +19,14 @@ class M_admin_ticket extends CI_Model {
 
 	//menyimpan data ticket
 	public function simpan_ticket($param=''){
-		$data=array('id_cinema' => $param['cinema'],
-					'name' => $param['name'],
-					'director' => $param['director'],
-					'content' => $param['content'],
-					'images' => $param['images'],
-					'categories' => $param['categories'],
-					'play' => $param['play'],
-					'create' => $param['created'],
-					'create_by' => $param['created_by']
+		$data=array('nama' => $param['film'],
+					'harga' => $param['harga'],
+					'bioskop' => $param['bioskop'],
+					'stock' => $param['stock'],
+					'created' => $param['created'],
+					'created_by' => $param['created_by'],
+					'id_film' => $param['id_film'],
+					'id_bioskop' => $param['id_bioskop'],
 					);
 		$result=$this->db->insert('ticket_stock',$data);
 		return $this->db->affected_rows();
@@ -35,15 +34,14 @@ class M_admin_ticket extends CI_Model {
 
 	//melakukan perubahan data ticket
 	public function edit_ticket($param=''){
-		$data=array('id_cinema' => $param['cinema'],
-					'name' => $param['name'],
-					'director' => $param['director'],
-					'content' => $param['content'],
-					'images' => $param['images'],
-					'categories' => $param['categories'],
-					'play' => $param['play'],
-					'modifed' => $param['modified'],
-					'modified_by' => $param['modified_by']
+		$data=array('nama' => $param['film'],
+					'harga' => $param['harga'],
+					'bioskop' => $param['bioskop'],
+					'stock' => $param['stock'],
+					'modified' => $param['created'],
+					'modified_by' => $param['created_by'],
+					'id_film' => $param['id_film'],
+					'id_bioskop' => $param['id_bioskop'],
 					);
 		$this->db->where('id',$param['id_current']);
 		$sql = $this->db->update('ticket_stock', $data);

@@ -23,8 +23,8 @@
 						<div class="form-group">
 							<div class="input-group">
   								<span class="input-group-addon">Nama Film</span>
-  								<select name="cinema" class="form-control">
-  									<option value="<?php echo @$ticket[0]->nama; ?>"></option>
+  								<select name="movie" class="form-control">
+  									<option value="<?php //echo @$ticket[0]->nama; ?>"></option>
   									<?php
   										foreach ($film as $key => $value):
   									?>
@@ -45,7 +45,7 @@
 							<div class="input-group">
   								<span class="input-group-addon">Bioskop</span>
   								<select name="cinema" class="form-control">
-  									<option value="<?php echo @$ticket[0]->bioskop; ?>"></option>
+  									<option value="<?php //echo @$ticket[0]->bioskop; ?>"></option>
   									<?php
   										foreach ($bioskop as $key => $value):
   									?>
