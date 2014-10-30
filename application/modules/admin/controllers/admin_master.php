@@ -7,6 +7,8 @@ class Admin_master extends MX_Controller {
 		parent::__construct();
 		$this->module='admin';
 		$this->cname='admin_master';
+		$user = $this->session->userdata('swhpsession');
+		$this->user = $user[0]->level;
 		$this->load->model('m_admin_cinemas','acdb');
 		$this->load->model('m_admin_movies','amdb');
 		$this->load->model('m_admin_ticket','atdb');

@@ -6,28 +6,42 @@ class Movie extends MX_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->module='client';
-		// $this->cname='ticket';
-		// $this->load->model('m_users','udb');
+		$this->cname='movie';
+		$this->load->model('m_movies','mdb');
 	}
 
-	//menampilkan halaman awal jadwal film
+	//menampilkan halaman awal bioskop
 	public function cinema(){
 
 	}
 
-	//menampilkan film berdasar sorting tanggal
+	//menampilkan bioskop berdasar sorting tanggal
 	public function load_cinema(){
+		
 
 	}
 
 	//menampilkan halaman awal lokasi bioskop
-	public function movie(){
+	public function film(){
+		$data['cname'] = $this->cname;
+		$data['title'] = 'Film Fantasy Malang';
+		$data['content'] = $this->load->view('/movie',$data,true);
+		$this->load->view('/template',$data);
+	}
 
+	//menampilkan jadwal film
+	public function load_film(){
+		$param = $this->input->post();
+		$data['film'] = $this->mdb->get_film($param);
+		$this->load->view('/list_movie',$data);	
 	}
 
 	//menampilkan detail bioskop
-	public function detail_movie(){
-
+	public function detail_movie($id=''){
+		$data['detail'] = $this->mdb->get_film_by_id($id);
+		// print_r($data);exit;
+		$data['content'] = $this->load->view('/detail_film',$data,true);
+		$this->load->view('/template',$data);
 	}
 
 	//memberikan rating pada bioskop

@@ -7,6 +7,8 @@ class Admin extends MX_Controller {
 		parent::__construct();
 		$this->module='admin';
 		$this->cname='admin';
+		$user = $this->session->userdata('swhpsession');
+		$this->user = $user[0]->level;
 		$this->load->model('m_admin_users','audb');
 		$this->load->model('m_admin_cinemas','acdb');
 		$this->load->model('m_admin_movies','amdb');
@@ -20,7 +22,7 @@ class Admin extends MX_Controller {
 		if($user != null){
 			if($param[0]->level == '1'){
 				$data['title'] = 'Welcome';
-				$data['sidebar'] = $this->load->view('/general/sidebar',$data,TRUE);
+
 				$data['content'] = $this->load->view('/main', $data, TRUE);
 				$this->load->view('admin/template', $data);
 			}else{

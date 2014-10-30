@@ -62,7 +62,7 @@
   							<br>
   							<div class="input-group">
   								<span class="input-group-addon">Tanggal Tayang</span>
-  								<input type="text" id="play" name="play" class="form-control date-picker text-center" placeholder="Tanggal Tayang">
+  								<input type="text" id="play" name="play" class="form-control date-picker text-center" placeholder="Tanggal Tayang" >
   								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
   							</div>
 							<br>
@@ -93,6 +93,6 @@
 	<script type="text/javascript">
 		$(document).ready(
 			function(){
-    			$( ".date-picker" ).datepicker();
+    			$( ".date-picker" ).datepicker({ dateFormat: 'yy-mm-dd' });
   			});
 	</script>

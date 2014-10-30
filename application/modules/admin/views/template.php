@@ -9,7 +9,10 @@
 <?php $this->load->view('/general/navigasi'); ?>
 
 <div class="container">
-	<?php echo @$sidebar; ?>
+	<?php if($this->user == '1'){
+		$this->load->view('general/sidebar','');
+		} 
+	?>
 	<div class="col-md-9">
 		<?php echo $content; ?>
 	</div>
