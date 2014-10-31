@@ -19,3 +19,6 @@
 <script src="<?php echo base_url().'public/assets/js/jquery-ui.js';?>" type="text/javascript"></script>
 <link href="<?php echo base_url().'public/assets/css/jquery-ui.theme.css';?>" rel="stylesheet" type="text/css" media="screen"/>
 <link href="<?php echo base_url().'public/assets/css/jquery-ui.css';?>" rel="stylesheet" type="text/css" media="screen"/>
+<!-- jquery select chosen -->
+<link href="<?php echo base_url().'public/assets/css/chosen.css';?>" rel="stylesheet" type="text/css" media="screen"/>
+<script src="<?php echo base_url().'public/assets/js/chosen.jquery.js';?>" type="text/javascript"></script>

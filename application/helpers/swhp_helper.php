@@ -62,6 +62,13 @@ function send_email($to,$subject,$message){
         }
 }
 
+//format angka jadi rupiah
+function format_rupiah($angka)
+{
+    $jadi = "Rp " . number_format((double)$angka,2,',','.');
+    return $jadi;
+} 
+
 //memotong teks yang banyak
 function cut_word($sentence,$word_count)
 {

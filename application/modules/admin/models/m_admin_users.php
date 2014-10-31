@@ -26,6 +26,16 @@ class M_admin_users extends CI_Model {
 		$sql = $this->db->get('users');
 		return $sql->result();
 	}
+
+	//update data user
+	public function update_user($param=''){
+		$data=array( 'isAktif' => $param['stat'],
+					'level' => $param['lvl']
+					);
+		$this->db->where('idUser',$param['id']);
+		$sql = $this->db->update('users', $data);
+		return $this->db->affected_rows();
+	}
 }
 /* End of file m_admin_users.php */
 

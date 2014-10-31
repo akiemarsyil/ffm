@@ -47,7 +47,7 @@
 							<br>
 							<div class="input-group">
   								<span class="input-group-addon">Bioskop</span>
-  								<select name="cinema" class="form-control">
+  								<select name="cinema" class="chosen-select form-control">
   									<option value=""></option>
   									<?php
   										foreach ($bioskop as $key => $value):

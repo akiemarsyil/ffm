@@ -31,7 +31,14 @@ class Admin_user extends MX_Controller {
 
 	//mengedit status aktivasi user
 	public function edit_user(){
-
+		$param = $this->input->post();
+		// print_r($param);exit;
+		$insert = $this->udb->update_user($param);
+        if($insert == true){
+        	echo '1|'.succ_msg('Data berhasil dimasukkan');
+        }else{
+        	echo '0|'.warn_msg('Terjadi Kesalahan, coba beberapa saat lagi');	
+        }
 	}
 }
 /* End of file admin_user.php */
