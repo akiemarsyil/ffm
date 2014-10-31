@@ -22,7 +22,7 @@
     				</div>
     			</div>
               	<li><a href="#">Forum</a></li>
-              	<li><a href="#">Member</a></li>
+              	<li><a href="<?php echo base_url().'admin/admin_user/load_user';?>">Member</a></li>
               	<li><a href="#">Komplain</a></li>
             </ul>
          </div><!--/.well -->

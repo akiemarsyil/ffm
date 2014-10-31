@@ -1,15 +1,15 @@
 <div class="container">
 	<div class="panel panel-default">
 	  	<div class="panel-heading">
-	    	<h3 class="panel-title">judul film</h3>
+	    	<h3 class="panel-title">Informasi Film</h3>
 	  	</div>
 	  	<div class="panel-body">
-	  		<div class="row">
+	  		<div class="row" style="margin-left:auto;margin-right:auto">
 	  			<div class="col-md-5">
 	  				<?php 
 	  					if($detail[0]->image){
 	  				?>
-	  					<img style="margin-left:auto;margin-right:auto" src="<?php echo base_url().'public/assets/movie/'.$detail[0]->image;?>">
+	  					<img src="<?php echo base_url().'public/assets/movie/'.$detail[0]->image;?>">
 	  				<?php 
 	  					}else{
 	  						echo "No Image";
@@ -17,6 +17,7 @@
 	  				?>
 	  			</div>
 	  		</div>
+	  		<br><br>
 	    	<div class="form-group">
 	    		<div class="row">
 	    			<div class="col-md-3">
@@ -78,6 +79,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#button').on('click',function(){
+			// similar behavior as clicking on a link
 			window.location.href = "<?php echo base_url().$this->module.'/'.$this->cname.'/film';?>";
 		})
 	});

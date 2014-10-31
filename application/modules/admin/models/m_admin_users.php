@@ -11,6 +11,21 @@ class M_admin_users extends CI_Model {
 		$result = $query->result();
 		return $result;
 	}
+
+	//menampilkan user
+	public function get_user(){
+		$this->db->where('level', '0');
+		$sql = $this->db->get('users');
+		return $sql->result();
+	}
+
+	//menampilkan user berdasar id
+	public function get_user_by_id($id=''){
+		$this->db->where('idUser', $id);
+		$this->db->where('level', '0');
+		$sql = $this->db->get('users');
+		return $sql->result();
+	}
 }
 /* End of file m_admin_users.php */
 
