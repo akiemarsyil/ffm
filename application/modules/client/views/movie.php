@@ -5,7 +5,7 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<blockquote>
-							<p><i class="icon-file-text"></i> Informasi Film Film</p>
+							<p><i class="icon-file-text"></i> Informasi Film</p>
 						</blockquote>
 						<!-- <a href="<?php echo base_url($this->module).'/admin_master/form_film'; ?>" class="btn btn-success">
 							<i class="icon-plus icon-white"></i> Add

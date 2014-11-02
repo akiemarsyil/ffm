@@ -5,7 +5,7 @@
 	  	</div>
 	  	<div class="panel-body">
 	  		<div class="row" style="margin-left:auto;margin-right:auto">
-	  			<div class="col-md-5">
+	  			<div class="col-md-5 col-md-offset-4">
 	  				<?php 
 	  					if($detail[0]->image){
 	  				?>
