@@ -74,7 +74,14 @@ class Movie extends MX_Controller {
 
 	//melakukan komen terhadap bioskop
 	public function do_comment(){
-
+		$param = $this->input->post();
+		// print_r($param);exit;
+		$save = $this->rdb->insert_rating($param);
+		if($save == true){
+			echo '1|'.succ_msg('Data berhasil dimasukkan');
+		}else{
+			echo '0|'.warn_msg('Terjadi Kesalahan, coba beberapa saat lagi');
+		}
 	}
 }
 /* End of file movie.php */
