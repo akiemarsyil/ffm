@@ -95,7 +95,7 @@
 						<div class="form-group">
 							<!-- Untuk menu edit -->
 							<!-- <input hidden id="img_old" name="img_old" value="<?php echo @$jadwal[0]->images;?>"> -->
-							<input hidden id="id_current" name="id_current" value="<?php echo @$jadwal[0]->id;?>">
+							<input hidden id="id_current" name="id_current" value="<?php echo @$jadwal[0]->idSchedules;?>">
 							<!-- Tombol aksi -->
 							<button type="submit" class="btn btn-primary">Simpan</button>
 							<a href="<?php echo base_url($this->module).'/jadwal'; ?>" class="btn btn-warning">Batal</a>
