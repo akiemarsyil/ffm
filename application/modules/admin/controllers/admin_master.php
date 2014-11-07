@@ -437,7 +437,7 @@ class Admin_master extends MX_Controller {
 				}else{
 					$this->session->set_flashdata('flash_message',err_msg('Terjadi Kesalahan, coba beberapa saat lagi'));
 				}
-        	redirect($this->module.'/ticket');
+        	redirect($this->module.'/schedule');
         }
 	}
 
@@ -486,7 +486,7 @@ class Admin_master extends MX_Controller {
 				}else{
 					$this->session->set_flashdata('flash_message',err_msg('Terjadi Kesalahan, coba beberapa saat lagi'));
 				}
-        	redirect($this->module.'/ticket');
+        	redirect($this->module.'/schedule');
         }
 	}
 
@@ -498,7 +498,7 @@ class Admin_master extends MX_Controller {
 		}else{
 			$this->session->set_flashdata('flash_message',err_msg('Terjadi Kesalahan, coba beberapa saat lagi'));
 		}
-		redirect($this->module.'/ticket');
+		redirect($this->module.'/schedule');
 	}
 }
 /* End of file admin_master.php */

@@ -18,14 +18,12 @@ class M_admin_schedules extends CI_Model {
 
 	//menyimpan data jadwal
 	public function simpan_jadwal($param=''){
-		$data=array('nama' => $param['film'],
-					'harga' => $param['harga'],
+		$data=array('id_cinema' => $param['id_bioskop'],
+					'id_movie' => $param['id_film'],
+					'nama' => $param['film'],
 					'bioskop' => $param['bioskop'],
-					'stock' => $param['stock'],
-					'created' => $param['created'],
-					'created_by' => $param['created_by'],
-					'id_film' => $param['id_film'],
-					'id_bioskop' => $param['id_bioskop'],
+					'hari' => $param['hari'],
+					'pukul' => $param['pukul']
 					);
 		$result=$this->db->insert('schedule',$data);
 		return $this->db->affected_rows();
@@ -33,14 +31,12 @@ class M_admin_schedules extends CI_Model {
 
 	//melakukan perubahan data jadwal
 	public function edit_jadwal($param=''){
-		$data=array('nama' => $param['film'],
-					'harga' => $param['harga'],
+		$data=array('id_cinema' => $param['id_bioskop'],
+					'id_movie' => $param['id_film'],
+					'nama' => $param['film'],
 					'bioskop' => $param['bioskop'],
-					'stock' => $param['stock'],
-					'modified' => $param['created'],
-					'modified_by' => $param['created_by'],
-					'id_film' => $param['id_film'],
-					'id_bioskop' => $param['id_bioskop'],
+					'hari' => $param['hari'],
+					'pukul' => $param['pukul']
 					);
 		$this->db->where('idSchedules',$param['id_current']);
 		$sql = $this->db->update('schedule', $data);

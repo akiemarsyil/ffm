@@ -22,3 +22,6 @@
 <!-- jquery select chosen -->
 <link href="<?php echo base_url().'public/assets/css/chosen.css';?>" rel="stylesheet" type="text/css" media="screen"/>
 <script src="<?php echo base_url().'public/assets/js/chosen.jquery.js';?>" type="text/javascript"></script>
+<!-- jquery timepicker -->
+<link href="<?php echo base_url().'public/assets/css/jquery.timepicker.css';?>" rel="stylesheet" type="text/css" media="screen"/>
+<script src="<?php echo base_url().'public/assets/js/jquery.timepicker.js';?>" type="text/javascript"></script>
