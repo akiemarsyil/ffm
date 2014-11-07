@@ -12,6 +12,7 @@ class Admin_master extends MX_Controller {
 		$this->load->model('m_admin_cinemas','acdb');
 		$this->load->model('m_admin_movies','amdb');
 		$this->load->model('m_admin_ticket','atdb');
+		$this->load->model('m_admin_schedules','sdb');
 	}
 
 	//menampilkan form tambah atau edit bioskop
@@ -363,6 +364,135 @@ class Admin_master extends MX_Controller {
 	//delete ticket
 	public function delete_ticket($id=''){
 		$hasil = $this->atdb->delete_ticket($id);
+		if($hasil == true){
+			$this->session->set_flashdata('flash_message',succ_msg('Data berhasil di Hapus'));
+		}else{
+			$this->session->set_flashdata('flash_message',err_msg('Terjadi Kesalahan, coba beberapa saat lagi'));
+		}
+		redirect($this->module.'/ticket');
+	}
+
+	//menampilkan form tambah atau edit jadwal
+	public function form_jadwal($id=''){
+		$data['cname'] = $this->cname;
+		$data['title'] = "Tambah Jadwal";
+		$data['aksi'] = 'add';
+		$data['bioskop'] = $this->acdb->get_bioskop();
+		$data['film'] = $this->amdb->get_film();
+		// print_r($data);exit;
+		if($id){
+			$content = $this->sdb->get_jadwal_by_id($id);
+			// print_r($content);exit;
+			$data['jadwal'] = $content;
+			$data['title'] = 'Edit Jadwal';
+			$data['aksi'] = 'edit';
+		}
+		$data['content'] = $this->load->view('/admin_form_jadwal',$data,TRUE);
+		$this->load->view('/template', $data);
+	}
+
+	//insert jadwal baru
+	public function tambah_jadwal(){
+		$param = $this->input->post();
+		// $path = "public/assets/movie/";
+		// $user = $this->session->userdata('swhpsession');
+		// $param['created_by'] = $user[0]->username;
+		// print_r(explode('|',$param['movie']));exit;
+		$movie = explode('|',$param['movie']);
+		$cinema = explode('|',$param['cinema']);
+		$param['film'] = $movie[1];
+		$param['id_film'] = $movie[0];
+		$param['bioskop'] = $cinema[1];
+		$param['id_bioskop'] = $cinema[0];
+		// print_r($param);exit;
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('hari', 'Hari', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('pukul', 'Pukul', 'trim|required|xss_clean');
+		// $this->form_validation->set_rules('cinema', 'Bioskop', 'trim|required|xss_clean');
+		if ($this->form_validation->run() == FALSE) {
+            //tidak memenuhi validasi
+            $this->session->set_flashdata('flash_message',err_msg(validation_errors()));
+			redirect($_SERVER['HTTP_REFERER']);
+        } else {
+    //     	if(isset($_FILES['images'])){
+				// 	$valid_formats = array("jpg","png","JPG","PNG");
+				// 	$name = $_FILES['images']['name'];
+				// 	if(strlen($name)){
+				// 		$ext= end(explode(".",$name));
+				// 		if(in_array($ext, $valid_formats)){
+				// 			if(move_uploaded_file($_FILES['images']['tmp_name'], $path.$_FILES['images']['name'])){
+				// 				$param['images'] = $_FILES['images']['name'];	
+				// 			}else{
+				// 				$this->session->set_flashdata('flash_message',err_msg("Failed Upload File"));
+				// 			}
+				// 		}else{
+				// 			$this->session->set_flashdata('flash_message',err_msg("Wrong Format //File"));
+				// 		}
+				// 	}
+				// }
+        	// $param['created'] =  date('Y-m-d H:i:s');
+        	$save = $this->sdb->simpan_jadwal($param);
+        	if($save == true){
+					$this->session->set_flashdata('flash_message',succ_msg('Data berhasil di Tambahkan'));
+				}else{
+					$this->session->set_flashdata('flash_message',err_msg('Terjadi Kesalahan, coba beberapa saat lagi'));
+				}
+        	redirect($this->module.'/ticket');
+        }
+	}
+
+	//edit jadwal
+	public function edit_jadwal($id=''){
+		$param = $this->input->post();
+		// $path = "public/assets/movie/";
+		// $user = $this->session->userdata('swhpsession');
+		// $param['modified_by'] = $user[0]->username;
+		$movie = explode('|',$param['movie']);
+		$cinema = explode('|',$param['cinema']);
+		$param['film'] = $movie[1];
+		$param['id_film'] = $movie[0];
+		$param['bioskop'] = $cinema[1];
+		$param['id_bioskop'] = $cinema[0];
+		$this->load->library('form_validation');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('hari', 'Hari', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('pukul', 'Pukul', 'trim|required|xss_clean');
+		if ($this->form_validation->run() == FALSE) {
+            //tidak memenuhi validasi
+            $this->session->set_flashdata('flash_message',err_msg(validation_errors()));
+			redirect($_SERVER['HTTP_REFERER']);
+        } else {
+    //     	if(isset($_FILES['images'])){
+    //     			// @unlink($path.$param['img_old']);
+				// 	$valid_formats = array("jpg","png","JPG","PNG");
+				// 	$name = $_FILES['images']['name'];
+				// 	if(strlen($name)){
+				// 		$ext= end(explode(".",$name));
+				// 		if(in_array($ext, $valid_formats)){
+				// 			if(move_uploaded_file($_FILES['images']['tmp_name'], $path.$_FILES['images']['name'])){
+				// 				$param['images'] = $_FILES['images']['name'];	
+				// 			}else{
+				// 				$this->session->set_flashdata('flash_message',err_msg("Failed Upload File"));
+				// 			}
+				// 		}else{
+				// 			$this->session->set_flashdata('flash_message',err_msg("Wrong Format //File"));
+				// 		}
+				// 	}
+				// }
+        	// $param['modified'] =  date('Y-m-d H:i:s');
+        	$edit = $this->sdb->edit_jadwal($param);
+        	if($edit == true){
+					$this->session->set_flashdata('flash_message',succ_msg('Data berhasil di Tambahkan'));
+				}else{
+					$this->session->set_flashdata('flash_message',err_msg('Terjadi Kesalahan, coba beberapa saat lagi'));
+				}
+        	redirect($this->module.'/ticket');
+        }
+	}
+
+	//delete jadwal
+	public function delete_jadwal($id=''){
+		$hasil = $this->sdb->delete_jadwal($id);
 		if($hasil == true){
 			$this->session->set_flashdata('flash_message',succ_msg('Data berhasil di Hapus'));
 		}else{

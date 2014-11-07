@@ -13,6 +13,7 @@ class Admin extends MX_Controller {
 		$this->load->model('m_admin_cinemas','acdb');
 		$this->load->model('m_admin_movies','amdb');
 		$this->load->model('m_admin_ticket','atdb');
+		$this->load->model('m_admin_schedules','sdb');
 	}
 
 	//melakukan authentication hanya admin saja yang bisa mengakses halaman admin
@@ -59,6 +60,15 @@ class Admin extends MX_Controller {
 		$data['title'] = "List Data Ticket | Master Ticket";
 		$data['ticket'] = $this->atdb->get_ticket();
 		$data['content'] = $this->load->view('/admin_ticket',$data,TRUE);
+		$this->load->view('/template',$data);
+	}
+
+	//menampilkan jadwal bioskop
+	public function schedule(){
+		$data['cname'] = $this->cname;
+		$data['title'] = "List Jadwal Film | Master Film";
+		$data['jadwal'] = $this->sdb->get_jadwal();
+		$data['content'] = $this->load->view('/admin_jadwal',$data,TRUE);
 		$this->load->view('/template',$data);
 	}
 }

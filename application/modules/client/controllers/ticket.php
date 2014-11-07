@@ -7,7 +7,7 @@ class Ticket extends MX_Controller {
 		parent::__construct();
 		$this->module='client';
 		$this->cname='ticket';
-		// $this->load->model('m_users','udb');
+		$this->load->model('m_tickets','tdb');
 	}
 
 	//menampilkan halaman awal menu ticket
@@ -15,7 +15,10 @@ class Ticket extends MX_Controller {
 		//percobaan
 		$user = $this->session->userdata('swhpsession');
 		if($user != null){
-			redirect($this->modul.'/'.$this->cname);
+			$data['title'] = 'Reservasi Ticket';
+			$data[]
+			$data['content'] = $this->load->view('/ticket',$data,true);
+			$this->load->view('/template',$data);
 		}else{
 			$data['title'] = 'Permission Denied';
 			$data['content'] = $this->load->view('/permission_denied',$data,true);

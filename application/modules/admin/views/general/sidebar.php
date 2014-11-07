@@ -17,6 +17,7 @@
     							<li><a href="<?php echo base_url().'admin/bioskop';?>">Bioskop</a></li>
     							<li><a href="<?php echo base_url().'admin/film';?>">Film</a></li>
     							<li><a href="<?php echo base_url().'admin/ticket';?>">Ticket</a></li>
+                  <li><a href="<?php echo base_url().'admin/schedule';?>">Jadwal</a></li>
     						</ul>
     					</div>
     				</div>
