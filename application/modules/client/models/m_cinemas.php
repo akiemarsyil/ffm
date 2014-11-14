@@ -16,6 +16,13 @@ class M_cinemas extends CI_Model {
 		$sql = $this->db->get('cinemas');
 		return $sql->result();
 	}
+
+	public function cinema($id){
+		$this->db->select('idCinemas, name');
+		$this->db->where('idCinemas', $id);
+		$sql = $this->db->get('cinemas');
+		return $sql->result();
+	}
 }
 /* End of file m_cinemas.php */
 

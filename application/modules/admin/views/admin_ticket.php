@@ -32,7 +32,7 @@
 								<tr>
 									<td><?php echo $i;?></td>
 									<td><?php echo $value->nama;?></td>
-									<td><?php echo $value->harga;?></td>
+									<td><?php echo format_rupiah($value->harga);?></td>
 									<td><?php echo $value->bioskop;?></td>
 									<td><?php echo $value->stock;?></td>
 									<td>

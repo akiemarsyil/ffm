@@ -325,9 +325,9 @@ class Admin_master extends MX_Controller {
 		$param['bioskop'] = $cinema[1];
 		$param['id_bioskop'] = $cinema[0];
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('name', 'Nama', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('director', 'director', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('categories', 'Kategori', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('movie', 'Nama Film', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('harga', 'Harga', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('cinema', 'Bioskop', 'trim|required|xss_clean');
 		if ($this->form_validation->run() == FALSE) {
             //tidak memenuhi validasi
             $this->session->set_flashdata('flash_message',err_msg(validation_errors()));

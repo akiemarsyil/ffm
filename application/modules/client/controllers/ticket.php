@@ -8,6 +8,10 @@ class Ticket extends MX_Controller {
 		$this->module='client';
 		$this->cname='ticket';
 		$this->load->model('m_tickets','tdb');
+		$this->load->model('m_cinemas','cdb');
+		$this->load->model('m_movies','mdb');
+		$this->load->model('m_users','udb');
+		$this->load->model('m_schedule','sdb');
 	}
 
 	//menampilkan halaman awal menu ticket
@@ -16,7 +20,8 @@ class Ticket extends MX_Controller {
 		$user = $this->session->userdata('swhpsession');
 		if($user != null){
 			$data['title'] = 'Reservasi Ticket';
-			$data[]
+			$data['bioskop'] = $this->cdb->get_cinema();
+			$data['user'] = $user[0]->idUser;
 			$data['content'] = $this->load->view('/ticket',$data,true);
 			$this->load->view('/template',$data);
 		}else{
@@ -26,19 +31,45 @@ class Ticket extends MX_Controller {
 		}
 	}
 
-	//menampilkan judul film yang tersedia pada bioskop
-	public function show_movie(){
+	//menampilkan dropdown film
+	public function get_film(){
+		$param = $this->input->post();
+		$film = $this->mdb->get_filter_film($param);
+		$opt = '<option value=""></option>';
+		foreach ($film as $value) {
+			$opt .= '<option value="'.$value->idMovies.'">'.$value->name.'</option>';
+		}
+		echo $opt;
+	}
+
+	public function load_form_ticket(){
+		$user = $this->session->userdata('swhpsession');
+		$data['usr'] = $user[0]->idUser;
+		$param = $this->input->post();
+		$data['user'] = $this->udb->user($param['id']);
+		$data['cinema'] = $this->cdb->cinema($param['cinema']);
+		$data['movie'] = $this->mdb->movie($param['movie']);
+		$data['jadwal'] = $this->sdb->schedule($param);
+		$data['stock'] = $this->tdb->ticket($param);
+		$this->load->view('/form_tiket',$data);
+	}
+
+	public function pesan_ticket(){
+		$param = $this->input->post();
+		// print_r($param);exit;
+		$param['order'] =  date('Y-m-d H:i:s');
+		$total = $param['harga'] * $param['jml'];
+		$param['total'] = $total;
+		$insert = $this->tdb->pesan_ticket($param);
+        if($insert == true){
+        	echo '1|'.succ_msg('Data berhasil dimasukkan, silahkan cetak kartu anda');
+        }else{
+        	echo '0|'.warn_msg('Terjadi Kesalahan, coba beberapa saat lagi');	
+        }
+	}
+
+	public function cetak_ticket(){
 		
-	}
-
-	//melakukan proses ketika pemesanan tiket
-	public function do_reservasi(){
-
-	}
-
-	//mencetak bukti reservasi ticket
-	public function cetak(){
-
 	}
 }
 /* End of file ticket.php */

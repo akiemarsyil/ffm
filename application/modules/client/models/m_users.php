@@ -81,6 +81,14 @@ class M_users extends CI_Model {
 		}
 		return $data;
 	}
+
+	//mengambil user yang pesan ticket
+	public function user($id){
+		$this->db->select('username, name, address, city, email, jenis_kelamin');
+		$this->db->where('idUser', $id);
+		$sql = $this->db->get('users');
+		return $sql->result();
+	}
 }
 /* End of file m_users.php */
 

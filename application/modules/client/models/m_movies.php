@@ -21,6 +21,21 @@ class M_movies extends CI_Model {
 		// echo $this->db->last_query();exit;
 		return $res->result();
 	}
+
+	public function get_filter_film($param=''){
+		$this->db->select('idMovies, id_cinema, name');
+		$this->db->where('id_cinema', $param['bioskop']);
+		$sql = $this->db->get('movies');
+		return $sql->result();
+	}
+
+	public function movie($id){
+		$this->db->select('idMovies, name');
+		$this->db->where('idMovies', $id);
+		$sql = $this->db->get('movies');
+		return $sql->result();
+	}
+
 }
 /* End of file m_movies.php */
 
