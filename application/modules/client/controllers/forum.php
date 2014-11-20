@@ -24,8 +24,12 @@ class Forum extends MX_Controller {
 	}
 
 	//mengambil semua data forum
-	public function forum(){
-
+	public function form_forum(){
+		$data['title'] = 'Forum Fantasy Film Malang';
+		$user = $this->session->userdata('swhpsession');
+		$data['sesi'] = $user[0]->idUser;
+		$data['content'] = $this->load->view('/form_forum',$data,true);
+		$this->load->view('/template',$data);
 	}
 
 	//mengambil semua data reply
@@ -35,7 +39,7 @@ class Forum extends MX_Controller {
 
 	//menginputkan forum baru
 	public function do_forum(){
-
+		
 	}
 
 	//mengedit forum jika session user == id user forum

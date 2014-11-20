@@ -62,16 +62,6 @@ class Movie extends MX_Controller {
 		$this->load->view('/template',$data);
 	}
 
-	//memberikan rating pada bioskop
-	public function rating(){
-
-	}
-
-	//menampilkan komentar terhadap bioskop
-	public function comment(){
-		
-	}
-
 	//melakukan komen terhadap bioskop
 	public function do_comment(){
 		$param = $this->input->post();

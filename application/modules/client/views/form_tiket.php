@@ -120,12 +120,13 @@
 	<div class="row">
 		<div class="col-md-4">
 			<button id="sub" type="submit" class="btn btn-success">Submit</button>
-			<a href="<?php echo base_url().$this->module.'/'.$this->cname;?>/cetak_ticket" class="btn btn-default" id="print" name="print">Print</a>
+			<a class="btn btn-default" id="print" name="print">Print</a>
 		</div>
 	</div>
 </form>
 <script type="text/javascript">
-	$('#print').hide();
+	// $('#print').hide();
+	$('#print').show();
 	$("#form_pesan").submit(function(){
 		var url = "<?php echo base_url().$this->module.'/'.$this->cname;?>/pesan_ticket"
 		$.ajax({
@@ -142,6 +143,26 @@
                 $("#flash_message").show();
                 $("#flash_message").html(data[1]);
                 setTimeout(function() {$("#flash_message").hide();}, 5000);
+            }
+        });
+        return false;
+	});
+	$('#print').on('click',function(){
+		var url = "<?php echo base_url().$this->module.'/'.$this->cname;?>/cetak_ticket"
+		$.ajax({
+            type: "POST",
+            url: url,
+            data: $('#form_pesan').serialize(),
+            success: function(msg)
+            {
+                // alert(msg);
+                data = msg.split("|");
+                if(data[0]==1){
+                    // $('#print').show();
+                }
+                $("#flash_message").show();
+                $("#flash_message").html(data[1]);
+                // setTimeout(function() {$("#flash_message").hide();}, 5000);
             }
         });
         return false;

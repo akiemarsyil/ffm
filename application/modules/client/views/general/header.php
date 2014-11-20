@@ -22,3 +22,5 @@
 <!-- jquery select chosen -->
 <link href="<?php echo base_url().'public/assets/css/chosen.css';?>" rel="stylesheet" type="text/css" media="screen"/>
 <script src="<?php echo base_url().'public/assets/js/chosen.jquery.js';?>" type="text/javascript"></script>
+<!-- ckeditor -->
+<script src="<?php echo base_url().'public/assets/js/ckeditor/ckeditor.js';?>" type="text/javascript"></script>

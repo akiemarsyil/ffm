@@ -69,7 +69,11 @@ class Ticket extends MX_Controller {
 	}
 
 	public function cetak_ticket(){
-		
+		$this->load->library('pdf');
+		$data['content'] = $this->input->post();
+		$data['tgl'] = date('Y-m-d H:i:s');
+		// print_r($param);exit;
+		$this->load->view('cetak_tiket',$data,TRUE);
 	}
 }
 /* End of file ticket.php */
