@@ -31,16 +31,27 @@ class Client extends MX_Controller {
 		$param = $this->input->post();
 		$login = $this->udb->login($param);
 		// print_r($login);exit;
-		if ($login != null) {
-			if($login[0]->isAktif == 'yes'){
-				$this->session->set_userdata('swhpsession',$login);
-            	redirect($this->module);
-            }else{
-            	$this->session->set_flashdata('flash_message', err_msg('Akun anda belum di aktifasi'));
-            	redirect($this->module.'/login');
-            }
-		}else{
-			$this->session->set_flashdata('flash_message', err_msg('Username atau password salah'));
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('passwd', 'Password', 'trim|required|xss_clean');
+		
+		if ($this->form_validation->run() == FALSE) {
+            //tidak memenuhi validasi
+            $this->session->set_flashdata('flash_message',err_msg(validation_errors()));
+			redirect($this->module.'/login');
+        } else {
+			if ($login != null || $login != FALSE) {
+				if($login[0]->isAktif == 'yes'){
+					$this->session->set_userdata('swhpsession',$login);
+        	    	redirect($this->module);
+        	    }else{
+        	    	$this->session->set_flashdata('flash_message', err_msg('Akun anda belum di aktifasi'));
+        	    	redirect($this->module.'/login');
+        	    }
+			}else{
+				$this->session->set_flashdata('flash_message', err_msg('Username atau password salah'));
+				redirect($this->module.'/login');
+			}
 		}
 	}
 

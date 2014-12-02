@@ -7,7 +7,7 @@ class Forum extends MX_Controller {
 		parent::__construct();
 		$this->module='client';
 		$this->cname='forum';
-		// $this->load->model('m_users','udb');
+		$this->load->model('m_forums','fdb');
 	}
 
 	//menampilkan halaman awal forum
@@ -28,6 +28,7 @@ class Forum extends MX_Controller {
 		$data['title'] = 'Forum Fantasy Film Malang';
 		$user = $this->session->userdata('swhpsession');
 		$data['sesi'] = $user[0]->idUser;
+		$data['aksi'] = 'add';
 		$data['content'] = $this->load->view('/form_forum',$data,true);
 		$this->load->view('/template',$data);
 	}
@@ -39,7 +40,26 @@ class Forum extends MX_Controller {
 
 	//menginputkan forum baru
 	public function do_forum(){
-		
+		$param = $this->input->post();
+		print_r($param);exit;
+		$user = $this->session->userdata('swhpsession');
+		$uname = $user[0]->username;
+		$created = $user[0]->idUser;
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('title', 'Judul', 'trim|required|xss_clean');
+		if ($this->form_validation->run() == FALSE) {
+			echo "0|".warn_msg(validation_errors());
+		}else{
+			$param['created'] =  date('Y-m-d H:i:s');
+			$param['user'] = $uname;
+			$param['created'] = $created;
+			$save = $this->fdb->add($param);
+			if($save == true){
+        		echo '1|'.succ_msg('Data berhasil dimasukkan, silahkan cetak kartu anda');
+        	}else{
+        		echo '0|'.warn_msg('Terjadi Kesalahan, coba beberapa saat lagi');	
+        	}
+		}
 	}
 
 	//mengedit forum jika session user == id user forum
