@@ -3,7 +3,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2">
-			This site &copy; by swhp
+			This site &copy; by RPL-9
 			</div>
 		</div>
 	</div>

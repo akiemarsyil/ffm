@@ -23,7 +23,7 @@
 				<td><?php echo $value->kategori; ?></td>
 				<td>
 					<a href="<?php echo base_url($this->module).'/'.$this->cname.'/detail_movie/'.$value->id; ?>"><span class="label label-success">
-                        <i class="glyphicon glyphicon-pencil"></i> Edit</span>
+                        <i class="glyphicon glyphicon-pencil"></i> Detail</span>
                     </a>
 				</td>
 			</tr>

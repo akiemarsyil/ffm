@@ -40,24 +40,24 @@ $pdf->SetFont('helvetica', '', 12);
 
 // add a page
 $pdf->AddPage();
-// print_r($content['name']);exit;
+// print_r($param['name']);exit;
 $isi = "<tr>
-				<td>".$content['cinema']."</td>
-				<td>".$content['movie']."</td>
-				<td>".$content['hari']."</td>
-				<td>".$content['pukul']."</td>
-				<td>".$content['jml']."</td>
-				<td>".$content['harga']."</td>
+				<td>".$param['cinema']."</td>
+				<td>".$param['movie']."</td>
+				<td>".$param['hari']."</td>
+				<td>".$param['pukul']."</td>
+				<td>".$param['jml']."</td>
+				<td>".$param['harga']."</td>
 			</tr>";
 
-//create HTML content
+//create HTML param
 $html = "<h1 style=\"text-align:center\">Fantasy Film Malang</h1>
 		<div class=\"row\">
 			<div class=\"col-md-2\">
 				<label>Nama : </label>
 			</div>
 			<div class=\"col-md-4\">
-				<label>".$content['name']."</label>
+				<label>".$param['name']."</label>
 			</div>
 		</div><br>
 		<div class=\"row\">
@@ -65,7 +65,7 @@ $html = "<h1 style=\"text-align:center\">Fantasy Film Malang</h1>
 				<label>alamat : </label>
 			</div>
 			<div class=\"col-md-4\">
-				<label>".$content['address']."</label>
+				<label>".$param['address']."</label>
 			</div>
 		</div><br>
 		<div class=\"row\">
@@ -92,7 +92,7 @@ $html = "<h1 style=\"text-align:center\">Fantasy Film Malang</h1>
 			."/tbody>
 		</table>";
 
-// output the HTML content
+// output the HTML param
 $pdf->writeHTML($html, true, false, true, false, '');
 
 // reset pointer to the last page

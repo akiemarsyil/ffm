@@ -25,3 +25,8 @@
 <!-- jquery timepicker -->
 <link href="<?php echo base_url().'public/assets/css/jquery.timepicker.css';?>" rel="stylesheet" type="text/css" media="screen"/>
 <script src="<?php echo base_url().'public/assets/js/jquery.timepicker.js';?>" type="text/javascript"></script>
+<!-- alertify -->
+<link href="<?php echo base_url().'public/assets/css/alertify.min.css';?>" rel="stylesheet" type="text/css" media="screen"/>
+<link href="<?php echo base_url().'public/assets/css/alertify.rtl.min.css';?>" rel="stylesheet" type="text/css" media="screen"/>
+<link href="<?php echo base_url().'public/assets/css/themes/default.rtl.min.css';?>" rel="stylesheet" type="text/css" media="screen"/>
+<script src="<?php echo base_url().'public/assets/js/alertify.min.js';?>" type="text/javascript"></script>

@@ -72,10 +72,12 @@ class M_users extends CI_Model {
 	//menangani login
 	public function login($param=''){
 		// $where = array('username' => $param['username']);
+		$password = paramEncrypt($param['passwd']);
 		$this->db->where('username', $param['username']);
-		$this->db->where('password', $param['passwd']);
-		$query = $this->db->get_where('users');
+		$this->db->where('password', $password);
+		$query = $this->db->get('users');
 		// echo $this->db->last_query();exit;
+		// print_r($query);exit;
 		if($query==NULL){
 			$data=FALSE;
 		} else {

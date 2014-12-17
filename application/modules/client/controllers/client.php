@@ -40,7 +40,7 @@ class Client extends MX_Controller {
             $this->session->set_flashdata('flash_message',err_msg(validation_errors()));
 			redirect($this->module.'/login');
         } else {
-			if ($login != null || $login != FALSE) {
+			if ($login != null || $login != FALSE ) {
 				if($login[0]->isAktif == 'yes'){
 					$this->session->set_userdata('swhpsession',$login);
         	    	redirect($this->module);
