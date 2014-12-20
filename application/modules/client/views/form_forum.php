@@ -3,14 +3,36 @@
 		<blockquote>
 			<p><i class="icon-file-text"></i> Posting Thread</p>
 		</blockquote>
-		<form id="form_forum" method="post">
-			<div id="flash_message"> </div>
+		<?php echo $this->session->flashdata('flash_message'); ?>
+			<?php
+				if($aksi == 'add'){
+			?>
+			<form action="<?php echo base_url($this->module).'/'.$this->cname.'/do_forum';?>" method="post" enctype="multipart/form-data">
+			<?php 
+				}else{
+			?>
+			<form action="<?php echo base_url($this->module).'/'.$this->cname.'/edit_forum';?>" method="post" enctype="multipart/form-data">
+			<?php } ?>
 				<div class="row">
 					<div class="col-md-2">
 						<label>Judul : </label>
 					</div>
 					<div class="col-md-4">
 						<input type="text" id="title" name="title" class="form-control" value="<?php //echo @$user[0]->address;?>">
+					</div>
+				</div><br>
+
+				<div class="row">
+					<div class="col-md-2">
+						<label>Image : </label>
+					</div>
+					<div class="col-md-4">
+						<?php 
+    						//if($user[0]->images!=null)
+    					?>
+    					<!-- <img class="col-md-3" src="<?php echo base_url().'public/assets/uploads/'.$user[0]->images; ?>"> -->
+						<input type="file" id="img" name="img">
+    					<span class="help-block">Max file size = 1 Mb</span>
 					</div>
 				</div><br>
 
@@ -42,36 +64,10 @@
 	
 				<div class="row">
 					<div class="col-md-4">
-						<button id="sub" type="submit" class="btn btn-success">Submit</button>
-						<!-- <a class="btn btn-default" id="print" name="print">Print</a> -->
+						<input type="submit" class="btn btn-success" value="submit">
+						<a href="<?php echo base_url().$this->module.'/'.$this->cname;?>" class="btn btn-warning">Batal</a>
 					</div>
 				</div>
 			</form>
 	</div>
 </div>
-<script type="text/javascript">
-	$('#form_forum').submit(function(){
-		var url = "<?php echo base_url().$this->module.'/'.$this->cname;?>/do_forum";
-		var title = $('#title').val();
-		var cat = $('#categories').val();
-		var isi = $('#isi').val();
-		$.ajax({
-            type: "POST",
-            url: url,
-            // data: $('#form_forum').serialize(),
-            data:{title:title,cat:cat,isi:isi},
-            success: function(msg)
-            {
-                // alert(msg);
-                data = msg.split("|");
-                if(data[0]==1){
-                    // $('#print').show();
-                }
-                $("#flash_message").show();
-                $("#flash_message").html(data[1]);
-                // setTimeout(function() {$("#flash_message").hide();}, 5000);
-            }
-        });
-        return false;
-	})
-</script>

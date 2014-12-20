@@ -1,5 +1,5 @@
 
-<form id="form_pesan" method="post">
+<form id="form_pesan" action="<?php echo base_url().$this->module.'/'.$this->cname;?>/cetak_ticket" method="post">
 	<div id="flash_message"> </div>
 	<div class="row">
 		<div class="col-md-2">
@@ -119,15 +119,15 @@
 	<div id="flash_message"></div><br>
 	<div class="row">
 		<div class="col-md-4">
-			<button id="sub" type="submit" class="btn btn-success">Submit</button>
-			<a href="<?php echo base_url().$this->module.'/'.$this->cname;?>/cetak_ticket" class="btn btn-default" id="print" name="print">Print</a>
+			<button id="sub" class="btn btn-success">Submit</button>
+			<button type="submit" class="btn btn-default" id="print" name="print">Print</button>
 		</div>
 	</div>
 </form>
 <script type="text/javascript">
 	// $('#print').hide();
 	$('#print').show();
-	$("#form_pesan").submit(function(){
+	$("#sub").on('click',function(){
 		var url = "<?php echo base_url().$this->module.'/'.$this->cname;?>/pesan_ticket"
 		$.ajax({
             type: "POST",
@@ -156,12 +156,12 @@
  //            success: function(msg)
  //            {
  //                // alert(msg);
- //                data = msg.split("|");
- //                if(data[0]==1){
- //                    // $('#print').show();
- //                }
- //                $("#flash_message").show();
- //                $("#flash_message").html(data[1]);
+ //                // data = msg.split("|");
+ //                // if(data[0]==1){
+ //                //     // $('#print').show();
+ //                // }
+ //                // $("#flash_message").show();
+ //                // $("#flash_message").html(data[1]);
  //                // setTimeout(function() {$("#flash_message").hide();}, 5000);
  //            }
  //        });

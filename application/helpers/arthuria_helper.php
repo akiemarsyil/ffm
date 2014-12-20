@@ -48,7 +48,7 @@ function send_email($to,$subject,$message){
         $CI->load->library('email', $config);
         // this will bind your attributes to email library
         $CI->email->set_newline("\r\n");
-        $CI->email->from($from, 'Email Complain');
+        $CI->email->from($from, 'Fantasy Film Malang');
         $CI->email->to($to);
         $CI->email->subject($subject);
         $CI->email->message($message);

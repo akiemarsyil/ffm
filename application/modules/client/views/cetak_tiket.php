@@ -34,69 +34,40 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 }
 
 // ---------------------------------------------------------
+$total = $param['jml'] * $param['harga'];
+// add a page Portrait A4
+$pdf->AddPage('P', 'A4');
 
 // set font
+$pdf->SetFont('helvetica', 'B', 20);
+
+$pdf->Write(0, 'Fantasy Film Malang', '', 0, 'C', true, 0, false, false, 0);
+
+// set core font
 $pdf->SetFont('helvetica', '', 12);
+//ganti baris
+$pdf->Ln();
 
-// add a page
-$pdf->AddPage();
-// print_r($param['name']);exit;
-$isi = "<tr>
-				<td>".$param['cinema']."</td>
-				<td>".$param['movie']."</td>
-				<td>".$param['hari']."</td>
-				<td>".$param['pukul']."</td>
-				<td>".$param['jml']."</td>
-				<td>".$param['harga']."</td>
-			</tr>";
-
-//create HTML param
-$html = "<h1 style=\"text-align:center\">Fantasy Film Malang</h1>
-		<div class=\"row\">
-			<div class=\"col-md-2\">
-				<label>Nama : </label>
-			</div>
-			<div class=\"col-md-4\">
-				<label>".$param['name']."</label>
-			</div>
-		</div><br>
-		<div class=\"row\">
-			<div class=\"col-md-2\">
-				<label>alamat : </label>
-			</div>
-			<div class=\"col-md-4\">
-				<label>".$param['address']."</label>
-			</div>
-		</div><br>
-		<div class=\"row\">
-			<div class=\"col-md-2\">
-				<label>Tanggal : </label>
-			</div>
-			<div class=\"col-md-4\">
-				<label>".$tgl."</label>
-			</div>
-		</div><br>
-		<table class=\"table display table-bordered table-hover\">
-			<thead>
-				<tr>
-					<th>Bioskop</th>
-					<th>Film</th>
-					<th>Hari</th>
-					<th>Mulai</th>
-					<th>Jumlah</th>
-					<th>Harga</th>
-				</tr>
-			</thead>
-			<tbody>".
-				$isi
-			."/tbody>
-		</table>";
-
-// output the HTML param
-$pdf->writeHTML($html, true, false, true, false, '');
-
-// reset pointer to the last page
-$pdf->lastPage();
+$pdf->Write(0, 'Nama : '.$param['name'].' ', '', 0, 'L', true, 0, false, false, 0);
+$pdf->Ln();
+$pdf->Write(0, 'Alamat : '.$param['address'].' ', '', 0, 'L', true, 0, false, false, 0);
+$pdf->Ln();
+$pdf->Write(0, 'Email : '.$param['email'].' ', '', 0, 'L', true, 0, false, false, 0);
+$pdf->Ln();
+$pdf->Write(0, 'Film : '.$param['movie'].' ', '', 0, 'L', true, 0, false, false, 0);
+$pdf->Ln();
+$pdf->Write(0, 'Bioskop : '.$param['cinema'].' ', '', 0, 'L', true, 0, false, false, 0);
+$pdf->Ln();
+$pdf->Write(0, 'Hari : '.$param['hari'].' ', '', 0, 'L', true, 0, false, false, 0);
+$pdf->Ln();
+$pdf->Write(0, 'Pukul : '.$param['pukul'].' ', '', 0, 'L', true, 0, false, false, 0);
+$pdf->Ln();
+$pdf->Write(0, 'Harga : '.format_rupiah($param['harga']).' ', '', 0, 'L', true, 0, false, false, 0);
+$pdf->Ln();
+$pdf->Write(0, 'Jumlah : '.$param['jml'].' ', '', 0, 'L', true, 0, false, false, 0);
+$pdf->Ln();
+$pdf->Write(0, 'Total Pembayaran : '.format_rupiah($total).' ', '', 0, 'L', true, 0, false, false, 0);
+$pdf->Ln();
 
 //Close and output PDF document
 $pdf->Output('ffm.pdf', 'I');
