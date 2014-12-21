@@ -252,5 +252,43 @@ function decoder($x)
 //     return $ret;
 //     exit();
 // }
+// pagination 
+function paging($cname,$totalrow,$limit,$uri){
+    $CI =& get_instance();
+    $CI->load->library('pagination');
+    $config['base_url'] = base_url().$cname;
+    $config['total_rows'] = $totalrow;//semua data yang mau ditampilkan
+    $config['per_page'] = $limit;//menampilkan per halaman
+    $config['num_links'] = 3;//jumlah angka yang ditambilkan sebelum dan sesudah current
 
+    $config['full_tag_open'] = '<nav><ul class="pagination">';
+    $config['full_tag_close'] = '</ul></nav>';
+
+    $config['first_link'] = 'First';
+    $config['first_tag_open'] = '<li>';
+    $config['first_tag_close'] = '</li>';
+
+    $config['last_link'] = 'Last';
+    $config['last_tag_open'] = '<li>';
+    $config['last_tag_close'] = '</li>';
+    
+    $config['next_tag_open'] = '<li>';
+    $config['next_tag_close'] = '</li>';
+    
+    $config['prev_tag_open'] = '<li>';
+    $config['prev_tag_close'] = '</li>';
+
+    $config['cur_tag_open'] = '<li class="active"><a href="#">';
+    $config['cur_tag_close'] = '</a></li>';
+
+    $config['uri_segment'] = $uri;
+
+    $config['num_tag_open'] = '<li>';
+    $config['num_tag_close'] = '</li>';
+
+    
+    
+    $CI->pagination->initialize($config);
+    return $CI->pagination->create_links();
+}
 ?>

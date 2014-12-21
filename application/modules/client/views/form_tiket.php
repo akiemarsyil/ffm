@@ -125,8 +125,8 @@
 	</div>
 </form>
 <script type="text/javascript">
-	// $('#print').hide();
-	$('#print').show();
+	$('#print').hide();
+	// $('#print').show();
 	$("#sub").on('click',function(){
 		var url = "<?php echo base_url().$this->module.'/'.$this->cname;?>/pesan_ticket"
 		$.ajax({

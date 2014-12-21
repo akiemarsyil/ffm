@@ -31,10 +31,17 @@ class Movie extends MX_Controller {
 
 	//menampilkan detail bioskop
 	public function detail_cinema($id=''){
+		$limit=3;
+		// $totalrow=0;
+		$uri=5;
+		$offset=$this->uri->segment($uri)?$this->uri->segment($uri):0;//offset berdasarkan uri segment
 		$data['cname'] = $this->cname;
 		$data['title'] = 'Film Fantasy Malang';
 		$data['bioskop'] = $this->cdb->get_cinema_by_id($id);
-		$data['rating'] = $this->rdb->get_rating();
+		$data['rating'] = $this->rdb->get_rating($limit, $offset);//mengambil data sesuai limit dan offset
+		$totalrow = count($this->rdb->get_rating());//menghitung jumlah data
+		$data['paging'] = paging($this->module.'/'.$this->cname.'/detail_cinema/'.$id,$totalrow,$limit,$uri);
+		// print_r($data);exit;
 		$data['content'] = $this->load->view('/detail_bioskop',$data,true);
 		$this->load->view('/template',$data);
 	}

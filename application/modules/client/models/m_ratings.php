@@ -6,9 +6,21 @@ class M_ratings extends CI_Model {
 	}
 
 	//menampilkan rating
-	public function get_rating(){
-		$sql = $this->db->get('ratings', 3);
+	public function get_rating($limit='',$offset=''){
+		if(empty($limit)&&empty($offset)){
+			$sql = $this->db->get('ratings');
+		}else{
+			$sql = $this->db->get('ratings',$limit,$offset);
+		}
 		return $sql->result();
+	}
+
+	public function count_comment()
+	{
+		$sql = $this->db->get('ratings');
+		if($sql->num_rows>0){
+			return $sql->row_array();
+		}
 	}
 
 	public function insert_rating($param=''){

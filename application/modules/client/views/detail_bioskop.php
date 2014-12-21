@@ -88,6 +88,9 @@
 	    		<?php
 	    			}
 	    		?>
+	    		
+	    			<?php echo $paging;?>
+	    		
 	    		<div class="row">
 	    			<div class="col-md-3">
 	    				<a id="komen" class="btn btn-primary">Komentar</a>
