@@ -18,11 +18,11 @@
 						<label>Judul : </label>
 					</div>
 					<div class="col-md-4">
-						<input type="text" id="title" name="title" class="form-control" value="<?php //echo @$user[0]->address;?>">
+						<input type="text" id="title" name="title" class="form-control" value="<?php echo @$forum[0]->title;?>">
 					</div>
 				</div><br>
 
-				<div class="row">
+				<!-- <div class="row">
 					<div class="col-md-2">
 						<label>Image : </label>
 					</div>
@@ -30,11 +30,11 @@
 						<?php 
     						//if($user[0]->images!=null)
     					?>
-    					<!-- <img class="col-md-3" src="<?php echo base_url().'public/assets/uploads/'.$user[0]->images; ?>"> -->
-						<input type="file" id="img" name="img">
+    					<img class="col-md-3" src="<?php echo base_url().'public/assets/uploads/'.$user[0]->images; ?>">
+						<input type="file" id="images" name="images">
     					<span class="help-block">Max file size = 1 Mb</span>
 					</div>
-				</div><br>
+				</div><br> -->
 
 				<div class="row">
 					<div class="col-md-2">
@@ -43,7 +43,7 @@
 					<div class="col-md-4">
 						<!-- <input type="text" id="address" name="address" class="form-control" value="<?php //echo @$user[0]->address;?>"> -->
 						<select id="categories" name="categories" class="form-control chosen-select">
-							<option></option>
+							<option value="<?php echo $forum[0]->cat;?>"><?php echo $forum[0]->cat;?></option>
 							<option value="action">Action</option>
 							<option value="drama">Drama</option>
 							<option value="comdey">Comedy</option>
@@ -58,12 +58,14 @@
 						<label>Content : </label>
 					</div>
 					<div class="col-md-12">
-						<textarea name="isi" id="isi" class="ckeditor" cols="80"   rows='8' ><?php //echo @$admin_content[0]->fulltext; ?></textarea>
+						<textarea name="isi" id="isi" class="ckeditor" cols="80"   rows='8' ><?php echo @$forum[0]->content; ?></textarea>
 					</div>
 				</div><br>
 	
 				<div class="row">
 					<div class="col-md-4">
+						<input hidden id="id_current" name="id_current" value="<?php echo @$forum[0]->id;?>">
+						<!-- <input hidden id="img_old" name="img_old" value="<?php //echo @$film[0]->images;?>"> -->
 						<input type="submit" class="btn btn-success" value="submit">
 						<a href="<?php echo base_url().$this->module.'/'.$this->cname;?>" class="btn btn-warning">Batal</a>
 					</div>
