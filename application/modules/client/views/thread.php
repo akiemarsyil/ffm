@@ -30,14 +30,26 @@
 							</div>
 						</div>
 					</div>
-					<?php //foreach ($reply as $key => $value) {
+					<?php foreach ($reply as $key => $value) {
 					?>
 					<div class="panel panel-default"> 
 						<div class="panel-body">
-						tes
+							<div class="col-md-3 col-sm-3 col-xs-3">
+								<img src="<?php echo base_url().'public/assets/uploads/'.$value->img;?>" style="width:25%;height:30%"><br>
+								<?php echo $value->uname;?><br>
+								Join : <?php $date = explode(' ', $value->date); echo $date[0];?><br>
+								<a href="#">Report</a>
+							</div>
+							<div class="col-md-9 col-sm-9 col-xs-9">
+								<?php echo $value->content;?>
+								<div class="pull-right" style="margin-top:9%">
+									<?php $tgl = explode(' ',$value->tgl); echo $tgl[0];?>
+								</div>
+							</div>
 						</div>
 					</div>
-					<?php //}?>
+					<?php }?>
+					<?php echo $paging;?>
 			  	</div>
 			</div>
 		</div>

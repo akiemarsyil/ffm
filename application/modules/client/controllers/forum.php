@@ -45,11 +45,14 @@ class Forum extends MX_Controller {
 		$data['sesi'] = $user[0]->idUser;
 		//harus memisah untuk meload daftar forum agar pagination berjalan
 		$limit=3;
-		$uri=4;//uri untuk no sesudah /forum/
+		$uri=5;//uri untuk no sesudah /forum/
 		$offset=$this->uri->segment($uri)?$this->uri->segment($uri):0;//offset berdasarkan uri segment
 		$data['title'] = 'Forum Fantasy Film Malang';
 		$data['thread'] = $this->fdb->get_thread($id);
-		// $data['reply'] = $this->rdb->get_reply($limit,$offset);
+		$data['reply'] = $this->rdb->get_reply($limit,$offset,$id);
+		$totalrow = count($this->rdb->get_reply('','',$id));//menghitung jumlah data
+		$data['paging'] = paging($this->module.'/'.$this->cname.'/forum_thread/'.$id,$totalrow,$limit,$uri);
+		// print_r($totalrow);exit;
  		$data['content'] = $this->load->view('/thread',$data,true);
 		$this->load->view('/template',$data);
 	}
@@ -144,7 +147,7 @@ class Forum extends MX_Controller {
 		$this->form_validation->set_rules('title', 'Judul', 'trim|required|xss_clean');
 		if ($this->form_validation->run() == FALSE) {
 			$this->session->set_flashdata('flash_message',err_msg(validation_errors()));
-			redirect($this->module.'/'.$this->cname.'form_reply');
+			redirect($this->module.'/'.$this->cname.'/form_reply');
 		}else{
 			$param = $this->input->post();
 			$user = $this->session->userdata('swhpsession');
@@ -157,8 +160,8 @@ class Forum extends MX_Controller {
         		$this->session->set_flashdata('flash_message',succ_msg('Data berhasil di Tambahkan'));
 			}else{
 					$this->session->set_flashdata('flash_message',err_msg('Terjadi Kesalahan, coba beberapa saat lagi'));
-				}
-        	redirect($this->module.'/'.$this->cname);
+			}
+        	redirect($this->module.'/'.$this->cname.'/forum_thread/'.$param['id_thread']);
 		}
 	}
 

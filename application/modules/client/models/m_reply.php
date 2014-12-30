@@ -13,6 +13,18 @@ class M_reply extends CI_Model {
 		$result=$this->db->insert('reply',$data);
 		return $this->db->affected_rows();
 	}
+
+	public function get_reply($limit='',$offset='',$id='')
+	{
+		$this->db->where('id_forum', $id);
+		if(empty($limit)&&empty($offset)){
+			$sql = $this->db->get('view_reply');
+		}else{
+			$sql = $this->db->get('view_reply',$limit,$offset);
+		}
+		// echo $this->db->last_query();exit;
+		return $sql->result();
+	}
 }
 /* End of file m_reply.php */
 
