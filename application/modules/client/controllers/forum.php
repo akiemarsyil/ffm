@@ -9,6 +9,7 @@ class Forum extends MX_Controller {
 		$this->cname='forum';
 		$this->load->model('m_forums','fdb');
 		$this->load->model('m_reply','rdb');
+		$this->load->model('m_complains','cdb');
 	}
 
 	//menampilkan halaman awal forum
@@ -172,7 +173,16 @@ class Forum extends MX_Controller {
 	
 	//melakukan komplain terhadap forum (posting utama bukan reply)
 	public function complain_forum(){
-
+		$param = $this->input->post();
+		// print_r($param);exit;
+		$input = $this->cdb->complain_thread($param);
+		if($input == TRUE){
+			// echo "1|".succ_msg("Data Berhasil di inputkan");
+			echo "Data Berhasil di inputkan";
+        }else{
+        	// echo "0|".err_msg("Gagal, coba beberapa saat kembali");
+        	echo "Gagal, coba beberapa saat kembali";
+        }
 	}
 
 	//melakukan komplain terhadap user

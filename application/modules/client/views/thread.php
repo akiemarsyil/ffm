@@ -14,7 +14,7 @@
 									<img src="<?php echo base_url().'public/assets/uploads/'.$thread[0]->img;?>" style="width:25%;height:30%"><br>
 									<?php echo $thread[0]->uname;?><br>
 									Join : <?php $date = explode(' ', $thread[0]->date); echo $date[0];?><br>
-									<a href="#">Report</a>
+									<a href="#" data-toggle="modal" data-target="#user">Report</a>
 								</div>
 								<div class="col-md-9 col-sm-9 col-xs-9">
 									<h4><?php echo $thread[0]->title;?></h4>
@@ -24,7 +24,7 @@
 										?>
 										<a href="<?php echo base_url().$this->module.'/'.$this->cname.'/form_forum/'.$thread[0]->id?>">Edit |</a>
 										<?php }?>
-										<a href="#">Report</a>
+										<a href="#" data-toggle="modal" data-target="#thread">Report</a>
 									</div>
 								</div>
 							</div>
@@ -38,7 +38,7 @@
 								<img src="<?php echo base_url().'public/assets/uploads/'.$value->img;?>" style="width:25%;height:30%"><br>
 								<?php echo $value->uname;?><br>
 								Join : <?php $date = explode(' ', $value->date); echo $date[0];?><br>
-								<a href="#">Report</a>
+								<a href="#" data-toggle="modal" data-target="#user2">Report</a>
 							</div>
 							<div class="col-md-9 col-sm-9 col-xs-9">
 								<?php echo $value->content;?>
@@ -55,3 +55,98 @@
 		</div>
 	</div>
 </div>
+
+<!-- modal report thread -->
+<div class="modal fade" id="thread" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+      		<div class="modal-header">
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        		<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      		</div>
+      		<div class="modal-body">
+        		<!-- <form id="complain_thread"> -->
+        			<div class="row">
+        				<div class="col-md-4">
+  							  	<label>Username :</label>
+        				</div>
+        				<div class="col-md-6">
+        					<input type="text" class="form-control" id="uname" value="<?php echo $thread[0]->uname;?>" disabled>
+        					<input hidden type="text" value="<?php echo $thread[0]->us_id;?>" id="us_id">
+        					<input hidden type="text" value="<?php echo $thread[0]->id;?>" id="thread_id">
+        				</div>
+        			</div><br>
+        			<div class="row">
+        				<div class="col-md-4">
+  							<label>Pesan :</label>
+        				</div>
+        				<div class="col-md-6">
+        					<textarea class="form-control" rows="3" id="pesan"></textarea>
+        				</div>
+        			</div>
+        		<!-- </form>	 -->
+      		</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary" id="comp_thread">Save changes</button>
+      		</div>
+    	</div>
+  	</div>
+</div>
+
+<!-- modal report user -->
+<div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+      		<div class="modal-header">
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        		<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      		</div>
+      		<div class="modal-body">
+        		tes user 1
+      		</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary">Save changes</button>
+      		</div>
+    	</div>
+  	</div>
+</div>
+
+<!-- modal report user reply -->
+<div class="modal fade" id="user2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+      		<div class="modal-header">
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        		<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      		</div>
+      		<div class="modal-body">
+        		tes user reply
+      		</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary">Save changes</button>
+      		</div>
+    	</div>
+  	</div>
+</div>
+<script type="text/javascript">
+	$('#comp_thread').on('click',function(){
+		var uname = $('#uname').val();
+		var us_id = $('#us_id').val();
+		var thread_id = $('#thread_id').val();
+		var pesan = $('#pesan').val();
+		$.ajax({
+			type: "POST",
+			url: "<?php echo base_url().$this->module.'/'.$this->cname.'/complain_forum/'; ?>",
+			data: {uname:uname,us_id:us_id,thread_id:thread_id,pesan:pesan},
+			success: function(msg)
+			{
+				// $('#pph_21').val(msg);
+				alert(msg);
+			}
+		});
+		return false;
+	})
+</script>
