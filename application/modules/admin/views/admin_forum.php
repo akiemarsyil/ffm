@@ -9,6 +9,7 @@
 							</blockquote>
 						</div>
 					</div>
+					<div id="flash_message"></div>
 					<div class="table-responsive">
 						<table id="example" class="table display table-bordered table-hover">
 							<thead>
@@ -56,7 +57,12 @@
 		            data : {id : object},
 		            success : function(msg)
 		            {
-		                // $('#example').dataTable().fnDraw();
+		                data = msg.split('|');
+                        if(data[0]==1){
+                            clear();
+                        }
+                        $('#flash_message').html(data[1]);
+                        setTimeout(function(){$('#flash_message').html('')},8000);
 		            }
 		        });
 		   	}

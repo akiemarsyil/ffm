@@ -5,6 +5,8 @@ class Admin_forum extends MX_Controller {
 		parent::__construct();
 		$this->module='admin';
 		$this->cname='admin_forum';
+		$user = $this->session->userdata('swhpsession');
+		$this->user = $user[0]->level;
 		$this->load->model('m_admin_forum','fdb');
 	}
 
@@ -19,7 +21,14 @@ class Admin_forum extends MX_Controller {
 
 	//menghapus forum
 	public function delete_forum(){
-
+		$id = $this->input->post('id');
+		// print_r($id);exit;
+		$delete = $this->fdb->delete($id);
+		if($delete==TRUE){
+			echo "1|".succ_msg("Data Berhasil di hapus");
+        }else{
+        	echo "0|".err_msg("Gagal, coba beberapa saat kembali");
+        }
 	}
 }
 /* End of file admin_forum.php */

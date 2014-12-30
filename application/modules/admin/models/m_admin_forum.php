@@ -10,6 +10,12 @@ class M_admin_forum extends CI_Model {
 		$sql = $this->db->get('forums');
 		return $sql->result();
 	}
+
+	public function delete($id='')
+	{
+		$sql = $this->db->delete('forums',array('idForums'=>$id));
+		return $this->db->affected_rows();
+	}
 }
 /* End of file m_admin_forum.php */
 
