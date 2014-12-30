@@ -79,13 +79,13 @@ class Forum extends MX_Controller {
 		$data['user'] = $user[0]->username;
 		$data['thread'] = $id;
 		$data['aksi'] = 'add';
-		if($id){
-			// $content = $this->acdb->get_bioskop_by_id($id);
-			$data['reply'] = $content;
-			$data['title'] = 'Edit Forum';
-			$data['aksi'] = 'edit';
-		}
-		$data['content'] = $this->load->view('/form_forum',$data,true);
+		// if($id){
+		// 	// $content = $this->acdb->get_bioskop_by_id($id);
+		// 	// $data['reply'] = $content;
+		// 	$data['title'] = 'Edit Forum';
+		// 	$data['aksi'] = 'edit';
+		// }
+		$data['content'] = $this->load->view('/form_reply',$data,true);
 		$this->load->view('/template',$data);
 
 	}
@@ -102,25 +102,6 @@ class Forum extends MX_Controller {
 			$user = $this->session->userdata('swhpsession');
 			$param['created_by'] = $user[0]->username;
 			$param['user'] = $user[0]->idUser;
-			// $param['images'] = '';
-			// print_r($param);exit;
-			// $path = "public/assets/forum/";
-			// if(isset($_FILES['images'])){
-			// 	$valid_formats = array("jpg","png","JPG","PNG");
-			// 	$name = $_FILES['images']['name'];
-			// 	if(strlen($name)){
-			// 		$ext= end(explode(".",$name));
-			// 		if(in_array($ext, $valid_formats)){
-			// 			if(move_uploaded_file($_FILES['images']['tmp_name'], $path.$_FILES['images']['name'])){
-			// 				$param['images'] = $_FILES['images']['name'];	
-			// 			}else{
-			// 				$this->session->set_flashdata('flash_message',err_msg("Failed Upload File"));
-			// 			}
-			// 		}else{
-			// 			$this->session->set_flashdata('flash_message',err_msg("Wrong Format //File"));
-			// 		}
-			// 	}
-			// }
 			$param['date'] =  date('Y-m-d H:i:s');
 				
 			$save = $this->fdb->add($param);
@@ -159,7 +140,26 @@ class Forum extends MX_Controller {
 
 	//menginputkan reply baru
 	public function do_reply(){
-
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('title', 'Judul', 'trim|required|xss_clean');
+		if ($this->form_validation->run() == FALSE) {
+			$this->session->set_flashdata('flash_message',err_msg(validation_errors()));
+			redirect($this->module.'/'.$this->cname.'form_reply');
+		}else{
+			$param = $this->input->post();
+			$user = $this->session->userdata('swhpsession');
+			$param['created_by'] = $user[0]->username;
+			$param['user'] = $user[0]->idUser;
+			$param['date'] =  date('Y-m-d H:i:s');
+				
+			$save = $this->rdb->add($param);
+			if($save == true){
+        		$this->session->set_flashdata('flash_message',succ_msg('Data berhasil di Tambahkan'));
+			}else{
+					$this->session->set_flashdata('flash_message',err_msg('Terjadi Kesalahan, coba beberapa saat lagi'));
+				}
+        	redirect($this->module.'/'.$this->cname);
+		}
 	}
 
 	//mengedit reply jika session user == id user reply
