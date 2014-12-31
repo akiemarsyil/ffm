@@ -15,6 +15,7 @@
 							<thead>
 								<tr>
 									<th width="10px" class="text-center">No</th>
+									<th width="10px" class="text-center">ID</th>
 									<th width="100px">Judul</th>
 									<th width="200">Kategori</th>
 									<th class="text-center" width="120px">Aksi</th>
@@ -27,6 +28,7 @@
 								?>
 								<tr>
 									<td><?php echo $i;?></td>
+									<td><?php echo $value->idForums;?></td>
 									<td><?php echo $value->title;?></td>
 									<td><?php echo $value->categories;?></td>
 									<td>

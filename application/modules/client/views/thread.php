@@ -1,3 +1,4 @@
+<?php $user = $this->session->userdata('swhpsession');?>
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 col-xs-12">
@@ -38,7 +39,7 @@
 								<img src="<?php echo base_url().'public/assets/uploads/'.$value->img;?>" style="width:25%;height:30%"><br>
 								<?php echo $value->uname;?><br>
 								Join : <?php $date = explode(' ', $value->date); echo $date[0];?><br>
-								<a href="#" data-toggle="modal" data-target="#user2">Report</a>
+								
 							</div>
 							<div class="col-md-9 col-sm-9 col-xs-9">
 								<?php echo $value->content;?>
@@ -62,7 +63,7 @@
     	<div class="modal-content">
       		<div class="modal-header">
         		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        		<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        		<h4 class="modal-title" id="myModalLabel">Complain Thread</h4>
       		</div>
       		<div class="modal-body">
         		<!-- <form id="complain_thread"> -->
@@ -71,9 +72,10 @@
   							  	<label>Username :</label>
         				</div>
         				<div class="col-md-6">
-        					<input type="text" class="form-control" id="uname" value="<?php echo $thread[0]->uname;?>" disabled>
+        					<input type="text" class="form-control" id="uname" value="<?php echo $user[0]->username;?>" disabled>
         					<input hidden type="text" value="<?php echo $thread[0]->us_id;?>" id="us_id">
         					<input hidden type="text" value="<?php echo $thread[0]->id;?>" id="thread_id">
+        					<input hidden type="text" value="thread" id="t_hread">
         				</div>
         			</div><br>
         			<div class="row">
@@ -100,47 +102,68 @@
     	<div class="modal-content">
       		<div class="modal-header">
         		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        		<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        		<h4 class="modal-title" id="myModalLabel">Complain User</h4>
       		</div>
       		<div class="modal-body">
-        		tes user 1
+        		<div class="row">
+        			<div class="col-md-4">
+  						  	<label>Username :</label>
+        			</div>
+        			<div class="col-md-6">
+        				<input type="text" class="form-control" id="un_ame" value="<?php echo $user[0]->username;?>" disabled>
+        				<input hidden type="text" value="<?php echo $thread[0]->us_id;?>" id="us_er_id">
+        				<input hidden type="text" value="<?php echo $thread[0]->id;?>" id="thr_ead_id">
+        				<input hidden type="text" value="user" id="us_er">
+        			</div>
+        		</div><br>
+        		<div class="row">
+        			<div class="col-md-4">
+  						<label>Pesan :</label>
+        			</div>
+        			<div class="col-md-6">
+        				<textarea class="form-control" rows="3" id="pe_san"></textarea>
+        			</div>
+        		</div>
       		</div>
       		<div class="modal-footer">
         		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        		<button type="button" class="btn btn-primary">Save changes</button>
+        		<button type="button" class="btn btn-primary" id="comp_user">Save changes</button>
       		</div>
     	</div>
   	</div>
 </div>
 
-<!-- modal report user reply -->
-<div class="modal fade" id="user2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  	<div class="modal-dialog">
-    	<div class="modal-content">
-      		<div class="modal-header">
-        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        		<h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      		</div>
-      		<div class="modal-body">
-        		tes user reply
-      		</div>
-      		<div class="modal-footer">
-        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        		<button type="button" class="btn btn-primary">Save changes</button>
-      		</div>
-    	</div>
-  	</div>
-</div>
+
 <script type="text/javascript">
 	$('#comp_thread').on('click',function(){
 		var uname = $('#uname').val();
 		var us_id = $('#us_id').val();
 		var thread_id = $('#thread_id').val();
 		var pesan = $('#pesan').val();
+		var status = $('#t_hread').val();
 		$.ajax({
 			type: "POST",
 			url: "<?php echo base_url().$this->module.'/'.$this->cname.'/complain_forum/'; ?>",
-			data: {uname:uname,us_id:us_id,thread_id:thread_id,pesan:pesan},
+			data: {uname:uname,us_id:us_id,thread_id:thread_id,pesan:pesan,stat:status},
+			success: function(msg)
+			{
+				// $('#pph_21').val(msg);
+				alert(msg);
+			}
+		});
+		return false;
+	})
+
+	$('#comp_user').on('click',function(){
+		var uname = $('#un_ame').val();
+		var us_id = $('#us_er_id').val();
+		var thread_id = $('#thr_ead_id').val();
+		var pesan = $('#pe_san').val();
+		var status = $('#us_er').val();
+		$.ajax({
+			type: "POST",
+			url: "<?php echo base_url().$this->module.'/'.$this->cname.'/complain_user/'; ?>",
+			data: {uname:uname,us_id:us_id,thread_id:thread_id,pesan:pesan,stat:status},
 			success: function(msg)
 			{
 				// $('#pph_21').val(msg);

@@ -36,6 +36,12 @@ class M_admin_users extends CI_Model {
 		$sql = $this->db->update('users', $data);
 		return $this->db->affected_rows();
 	}
+
+	public function get_complain()
+	{
+		$sql = $this->db->get('complains');
+		return $sql->result();
+	}
 }
 /* End of file m_admin_users.php */
 

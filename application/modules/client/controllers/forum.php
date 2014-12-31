@@ -187,7 +187,16 @@ class Forum extends MX_Controller {
 
 	//melakukan komplain terhadap user
 	public function complain_user(){
-
+		$param = $this->input->post();
+		// print_r($param);exit;
+		$input = $this->cdb->complain_user($param);
+		if($input == TRUE){
+			// echo "1|".succ_msg("Data Berhasil di inputkan");
+			echo "Data Berhasil di inputkan";
+        }else{
+        	// echo "0|".err_msg("Gagal, coba beberapa saat kembali");
+        	echo "Gagal, coba beberapa saat kembali";
+        }
 	}
 }
 /* End of file forum.php */

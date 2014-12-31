@@ -14,6 +14,7 @@
 							<thead>
 								<tr>
 									<th width="10px" class="text-center">No</th>
+									<th width="10px" class="text-center">ID</th>
 									<th width="100px">Nama</th>
 									<th width="200">Alamat</th>
 									<th width="150px">Jenis Kelamin</th>
@@ -28,6 +29,7 @@
 								?>
 								<tr>
 									<td><?php echo $i;?></td>
+									<td><?php echo $value->idUser;?></td>
 									<td><?php echo $value->name;?></td>
 									<td><?php echo $value->address;?></td>
 									<td><?php echo $value->jenis_kelamin;?></td>

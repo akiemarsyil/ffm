@@ -24,7 +24,7 @@
     			</div>
               	<li><a href="<?php echo base_url().'admin/admin_forum/load_forum';?>">Forum</a></li>
               	<li><a href="<?php echo base_url().'admin/admin_user/load_user';?>">Member</a></li>
-              	<li><a href="#">Komplain</a></li>
+              	<li><a href="<?php echo base_url().'admin/complain';?>">Komplain</a></li>
             </ul>
          </div><!--/.well -->
 </div>

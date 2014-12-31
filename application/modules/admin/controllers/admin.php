@@ -71,6 +71,15 @@ class Admin extends MX_Controller {
 		$data['content'] = $this->load->view('/admin_jadwal',$data,TRUE);
 		$this->load->view('/template',$data);
 	}
+
+	public function complain()
+	{
+		$data['cname'] = $this->cname;
+		$data['title'] = "List Complain";
+		$data['complain'] = $this->audb->get_complain();
+		$data['content'] = $this->load->view('/admin_complain',$data,TRUE);
+		$this->load->view('/template',$data);
+	}
 }
 /* End of file admin.php */
 
